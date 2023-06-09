@@ -1,5 +1,4 @@
-const dotenv = require("dotenv");
-dotenv.config();
+const { ZOHO_EMAIL, ZOHO_PW } = require("../config");
 const nodemailer = require("nodemailer");
 
 let transporter = nodemailer.createTransport({
@@ -7,8 +6,8 @@ let transporter = nodemailer.createTransport({
   secure: true,
   port: 465,
   auth: {
-    user: process.env.ZOHO_EMAIL,
-    pass: process.env.ZOHO_PW,
+    user: ZOHO_EMAIL,
+    pass: ZOHO_PW,
   },
 });
 
@@ -22,7 +21,7 @@ let transporter = nodemailer.createTransport({
 const sendMail = (recipient, subject, text) => {
   transporter.sendMail(
     {
-      from: process.env.ZOHO_EMAIL,
+      from: ZOHO_EMAIL,
       to: recipient,
       subject: subject,
       text: text,

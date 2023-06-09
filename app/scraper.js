@@ -1,8 +1,14 @@
 const { ZenRows } = require("zenrows");
 const fs = require("fs");
+const { ZENROWS_API } = require("../config");
+
+const run = async () => {
+  await scrapeData();
+  await readData();
+};
 
 const scrapeData = async () => {
-  const client = new ZenRows(`${process.env.ZENROWS_API}`);
+  const client = new ZenRows(ZENROWS_API);
   const url =
     "https://www.hermes.com/us/en/category/women/bags-and-small-leather-goods/bags-and-clutches/";
 
@@ -15,7 +21,7 @@ const scrapeData = async () => {
       proxy_country: "us",
       autoparse: "true",
     });
-    fs.writeFile("./data/data.json", JSON.stringify(data), (error) => {
+    fs.writeFile("./app/data/data.json", JSON.stringify(data), (error) => {
       if (error) {
         console.log(error);
       }
@@ -27,20 +33,22 @@ const scrapeData = async () => {
 };
 
 const readData = async () => {
-  fs.readFile("./data/data.json", "utf8", (error, data) => {
+  fs.readFile("./app/data/data.json", "utf8", (error, data) => {
     if (error) {
       console.log(error);
     }
+    console.log(`Reading from "data.json" is complete.`);
     jsonData = JSON.parse(data);
     let products =
       jsonData[1][
         "G.json.https://bck.hermes.com/products?category=WOMENBAGSBAGSCLUTCHES&a;locale=us_en&a;pagesize=40&a;sort=relevance"
       ].body.products;
-    console.log(products);
+    // console.log(products);
+    return products;
   });
 };
 
 module.exports = {
-  scrapeData,
+  run,
   readData,
 };
