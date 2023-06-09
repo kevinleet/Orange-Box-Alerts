@@ -3,8 +3,9 @@ const fs = require("fs");
 const { ZENROWS_API } = require("../config");
 
 const run = async () => {
-  await scrapeData();
-  await readData();
+  // await scrapeData();
+  let products = await readData();
+  return products;
 };
 
 const scrapeData = async () => {
@@ -21,11 +22,17 @@ const scrapeData = async () => {
       proxy_country: "us",
       autoparse: "true",
     });
-    fs.writeFile("./app/data/data.json", JSON.stringify(data), (error) => {
-      if (error) {
-        console.log(error);
-      }
-      console.log(`Writing to "data.json" is complete.`);
+
+    await new Promise((resolve, reject) => {
+      fs.writeFile("./app/data/data.json", JSON.stringify(data), (error) => {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {
+          console.log(`Writing to "data.json" is complete.`);
+          resolve();
+        }
+      });
     });
   } catch (error) {
     console.log(error);
@@ -33,22 +40,22 @@ const scrapeData = async () => {
 };
 
 const readData = async () => {
-  fs.readFile("./app/data/data.json", "utf8", (error, data) => {
-    if (error) {
-      console.log(error);
-    }
-    console.log(`Reading from "data.json" is complete.`);
-    jsonData = JSON.parse(data);
-    let products =
-      jsonData[1][
-        "G.json.https://bck.hermes.com/products?category=WOMENBAGSBAGSCLUTCHES&a;locale=us_en&a;pagesize=40&a;sort=relevance"
-      ].body.products;
-    // console.log(products);
-    return products;
+  return new Promise((resolve, reject) => {
+    fs.readFile("./app/data/data.json", "utf8", (error, data) => {
+      if (error) {
+        console.log(error);
+      }
+      console.log(`Reading from "data.json" is complete.`);
+      jsonData = JSON.parse(data);
+      let products =
+        jsonData[1][
+          "G.json.https://bck.hermes.com/products?category=WOMENBAGSBAGSCLUTCHES&a;locale=us_en&a;pagesize=40&a;sort=relevance"
+        ].body.products;
+      resolve(products);
+    });
   });
 };
 
 module.exports = {
   run,
-  readData,
 };
