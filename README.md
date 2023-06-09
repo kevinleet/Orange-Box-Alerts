@@ -8,4 +8,4 @@ A full stack web application that sends email notifications to users when produc
 
 ## Trello Board
 
-![Trello Board](https://trello.com/b/SDWqp7Rf/hermes-alerter)
+[Trello Board](https://trello.com/b/SDWqp7Rf/hermes-alerter)
