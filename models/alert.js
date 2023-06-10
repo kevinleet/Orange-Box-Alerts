@@ -2,7 +2,7 @@ const { Schema, SchemaType } = require("mongoose");
 
 const alertSchema = new Schema(
   {
-    product: { type: Schema.Types.ObjectId, ref: "Product" },
+    sku: { type: String, required: true },
     user: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }

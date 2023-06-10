@@ -1,6 +1,7 @@
 const sendMail = require("./nodemailer");
 const scraper = require("./scraper");
 const axios = require("axios");
+const { Alert } = require("../models");
 
 const run = async () => {
   let interval = setInterval(async () => {
@@ -17,10 +18,32 @@ const run = async () => {
           console.log(
             `Match Found: ${pf_title}, ${sku}, ${size}, ${avgColor}, ${price}`
           );
-          let recipient = "kevinli617@gmail.com";
+          let usersToAlert = productToAlert.usersToAlert;
           let subject = `Hermes Alert - ${pta_title} Found`;
           let text = `Match Found: ${pf_title}, ${sku}, ${size}, ${avgColor}, ${price}`;
-          // sendMail(recipient, subject, text);
+          for (const user of usersToAlert) {
+            let response = await axios.get(
+              `http://localhost:3001/api/alerts/`,
+              {
+                sku: sku,
+                user: user._id,
+              }
+            );
+            let data = response.data;
+            if (data.length > 0) {
+              console.log("User already alerted. Will not alert again.");
+              return;
+            } else {
+              console.log("Sending alert email to user!");
+              let recipient = user.email;
+              sendMail(recipient, subject, text);
+              const newAlert = new Alert({
+                sku: sku,
+                user: user._id,
+              });
+              await newAlert.save();
+            }
+          }
         }
       }
     }
