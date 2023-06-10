@@ -28,4 +28,4 @@ app.listen(PORT, () =>
   console.log(`Application is listening on port ${PORT}.`)
 );
 
-alerter.run();
+// alerter.run();
