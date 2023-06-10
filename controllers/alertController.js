@@ -8,7 +8,6 @@ const getAllAlerts = async (req, res) => {
     } else {
       alerts = await Alert.find();
     }
-
     res.json(alerts);
   } catch (error) {
     res.send(error);
