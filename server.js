@@ -17,11 +17,11 @@ app.use(logger("dev"));
 app.use("/api", Router);
 
 // Serve static files from the 'build' directory
-app.use(express.static("build"));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 // Handle all other requests
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
 app.listen(PORT, () =>
