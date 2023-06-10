@@ -4,6 +4,4 @@ const controller = require("../controllers/alertController");
 
 Router.get("/", controller.getAllAlerts);
 
-Router.post("/", controller.createAlert);
-
 module.exports = Router;

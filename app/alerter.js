@@ -1,13 +1,14 @@
 const sendMail = require("./nodemailer");
 const scraper = require("./scraper");
-const axios = require("axios");
-const { Alert } = require("../models");
+const { Product, Alert } = require("../models");
 
 const run = async () => {
   let interval = setInterval(async () => {
     let productsFound = await scraper.run();
-    let response = await axios.get("http://localhost:3001/api/products");
-    let productsToAlert = response.data;
+    let productsToAlert = await Product.find().populate({
+      path: "usersToAlert",
+      model: "User",
+    });
     console.log(`Scraping web store, comparing data...`);
     for (const productFound of productsFound.items) {
       let pf_title = productFound.title;
@@ -22,24 +23,28 @@ const run = async () => {
           let subject = `Hermes Alert - ${pta_title} Found`;
           let text = `Match Found: ${pf_title}, ${sku}, ${size}, ${avgColor}, ${price}`;
           for (const user of usersToAlert) {
-            let response = await axios.get(
-              `http://localhost:3001/api/alerts/`,
-              {
-                sku: sku,
-                user: user._id,
+            let alerts = await Alert.find({ sku: sku, user: user._id });
+            if (alerts.length > 0) {
+              if (Date.now() - alerts[0].updatedAtUnix < 86400000) {
+                console.log(
+                  "User was alerted less than 24 hours ago. Will not alert again."
+                );
+              } else if (Date.now() - alerts[0].updatedAtUnix > 86400000) {
+                console.log(
+                  "User was alerted over 24 hours ago. Sending new alert."
+                );
+                sendMail(user.email, subject, text);
+                await Alert.findByIdAndUpdate(alerts[0]._id, {
+                  updatedAtUnix: Date.now(),
+                });
               }
-            );
-            let data = response.data;
-            if (data.length > 0) {
-              console.log("User already alerted. Will not alert again.");
-              return;
             } else {
               console.log("Sending alert email to user!");
-              let recipient = user.email;
-              sendMail(recipient, subject, text);
+              sendMail(user.email, subject, text);
               const newAlert = new Alert({
                 sku: sku,
                 user: user._id,
+                updatedAtUnix: Date.now(),
               });
               await newAlert.save();
             }

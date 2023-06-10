@@ -11,13 +11,6 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-// let mailOptions = {
-//   from: process.env.ZOHO_EMAIL,
-//   to: "kevinli617@gmail.com",
-//   subject: "Sending Email using Node.js",
-//   text: "That was easy!",
-// };
-
 const sendMail = (recipient, subject, text) => {
   transporter.sendMail(
     {

@@ -14,20 +14,6 @@ const getAllAlerts = async (req, res) => {
     res.send(error);
   }
 };
-
-const createAlert = async (req, res) => {
-  try {
-    let alert = new Alert({
-      sku: req.body.sku,
-      user: req.body.user,
-    });
-    await alert.save();
-  } catch (error) {
-    res.send(error);
-  }
-};
-
 module.exports = {
   getAllAlerts,
-  createAlert,
 };
