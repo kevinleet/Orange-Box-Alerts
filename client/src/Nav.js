@@ -1,11 +1,11 @@
-import "./Nav.css";
+import { NavLink, Link } from "react-router-dom";
 
-function Nav(props) {
+const Nav = () => {
   return (
-    <nav className="navbar navbar-expand-md navbar-light bg-secondary">
-      <a className="navbar-brand mx-4 text-white" href="/">
+    <nav className="navbar navbar-expand-md bg-body-tertiary">
+      <span className="navbar-brand mx-4" style={{ cursor: "default" }}>
         Hermés Alerter
-      </a>
+      </span>
       <button
         className="navbar-toggler"
         type="button"
@@ -17,42 +17,39 @@ function Nav(props) {
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link mx-2 text-white" href="/">
+          <li className="nav-item">
+            <NavLink className="nav-link mx-2" to="/">
               Home
-            </a>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a
-              className="nav-link mx-2 text-white"
-              href="/"
-              onClick={props.handleClick}
-            >
-              How it Works
-            </a>
+            <NavLink className="nav-link mx-2" to="/howitworks">
+              How It Works
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link mx-2 text-white" href="/">
+            <NavLink className="nav-link mx-2" to="/recentrestocks">
               Recent Restocks
-            </a>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link mx-2 text-white" href="/">
+            <NavLink className="nav-link mx-2" to="/pricing">
               Pricing
-            </a>
+            </NavLink>
           </li>
-          <li className="nav-item align-self-center">
-            <button type="button" class="btn btn-success mx-3">
-              Subscribe
-            </button>
+          <li className="nav-item">
+            <Link to="/subscribe">
+              <button type="button" class="btn btn-success mx-2">
+                Subscribe
+              </button>
+            </Link>
           </li>
         </ul>
       </div>
     </nav>
   );
-}
+};
 
 export default Nav;
