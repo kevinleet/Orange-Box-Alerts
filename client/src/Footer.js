@@ -1,12 +1,8 @@
-import "./Nav.css";
-
-function Nav(props) {
+function Footer() {
   return (
-    <nav className="navbar navbar-expand-md navbar-light bg-secondary">
-      <a className="navbar-brand mx-4 text-white" href="/">
-        Hermés Alerter
-      </a>
-      <button
+    <nav className="navbar navbar-expand-md navbar-light bg-light mt-5 justify-content-center">
+      <p className="text-dark m-0 p-0">© Hermes Tracker 2023</p>
+      {/* <button
         className="navbar-toggler"
         type="button"
         data-toggle="collapse"
@@ -21,26 +17,22 @@ function Nav(props) {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <a className="nav-link mx-2 text-white" href="/">
+            <a className="nav-link mx-2" href="/">
               Home
             </a>
           </li>
           <li className="nav-item">
-            <a
-              className="nav-link mx-2 text-white"
-              href="/"
-              onClick={props.handleClick}
-            >
+            <a className="nav-link mx-2" href="/">
               How it Works
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link mx-2 text-white" href="/">
+            <a className="nav-link mx-2" href="/">
               Recent Restocks
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link mx-2 text-white" href="/">
+            <a className="nav-link mx-2" href="/">
               Pricing
             </a>
           </li>
@@ -50,9 +42,9 @@ function Nav(props) {
             </button>
           </li>
         </ul>
-      </div>
+      </div> */}
     </nav>
   );
 }
 
-export default Nav;
+export default Footer;
