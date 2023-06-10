@@ -1,5 +1,5 @@
 const RecentRestocks = () => {
-  return <h1>Recent Restocks</h1>;
+  return <h1 className="text-center">Recent Restocks</h1>;
 };
 
 export default RecentRestocks;
