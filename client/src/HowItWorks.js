@@ -1,3 +1,7 @@
+import image1 from "./images/accordion_img1.jpg";
+import image2 from "./images/accordion_img2.jpeg";
+import image3 from "./images/accordion_img3.jpeg";
+
 const HowItWorks = () => {
   return (
     <div className="container mt-2 bg-light mt-4 px-5 py-3 rounded w-75">
@@ -44,6 +48,15 @@ const HowItWorks = () => {
                   on its automated functionality to stay informed about new
                   product restocks effortlessly.
                 </div>
+                <div
+                  className="container w-75 my-3"
+                  style={{
+                    height: "300px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <img src={image3} className="img-fluid rounded w-100" />
+                </div>
               </div>
             </div>
           </div>
@@ -75,6 +88,12 @@ const HowItWorks = () => {
                 online shopping experience, saving valuable time and keeping
                 users informed about restocks and new arrivals relevant to their
                 tastes. overflow.
+              </div>
+              <div
+                className="container w-75 my-3"
+                style={{ height: "300px", overflow: "hidden" }}
+              >
+                <img src={image2} className="img-fluid rounded w-100" />
               </div>
             </div>
           </div>
@@ -114,6 +133,12 @@ const HowItWorks = () => {
                   enabling uninterrupted functionality, ensuring users can stay
                   ahead and promptly seize opportunities for new product
                   restocks.
+                </div>
+                <div
+                  className="container w-75 my-3"
+                  style={{ height: "300px", overflow: "hidden" }}
+                >
+                  <img src={image1} className="img-fluid rounded w-100" />
                 </div>
               </div>
             </div>
