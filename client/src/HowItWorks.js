@@ -52,7 +52,7 @@ const HowItWorks = () => {
                   <div
                     className="container w-100 my-3"
                     style={{
-                      height: "300px",
+                      "max-height": "300px",
                       overflow: "hidden",
                     }}
                   >
@@ -92,7 +92,7 @@ const HowItWorks = () => {
                 </div>
                 <div
                   className="container w-100 my-3"
-                  style={{ height: "300px", overflow: "hidden" }}
+                  style={{ "max-height": "300px", overflow: "hidden" }}
                 >
                   <img src={image2} className="img-fluid w-100" />
                 </div>
@@ -138,7 +138,7 @@ const HowItWorks = () => {
                   </div>
                   <div
                     className="container w-75 my-3"
-                    style={{ height: "300px", overflow: "hidden" }}
+                    style={{ "max-height": "200px", overflow: "hidden" }}
                   >
                     <img src={image1} className="img-fluid w-100" />
                   </div>
