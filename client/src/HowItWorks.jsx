@@ -1,8 +1,9 @@
 import image1 from "./images/accordion_1.jpeg";
 import image2 from "./images/accordion_2.jpeg";
 import image3 from "./images/accordion_3.jpg";
+import { Link } from "react-router-dom";
 
-import { Container, Accordion } from "react-bootstrap";
+import { Container, Accordion, Button } from "react-bootstrap";
 
 const HowItWorks = () => {
   return (
@@ -14,16 +15,19 @@ const HowItWorks = () => {
           undetectable web tool that programmatically accesses and scans the
           Hermes.com web store for product restocks.{" "}
         </h6>
-        <p className="">
+        {/* <p className="">
           Hermes Alerter integrates the latest enterprise-grade technologies to
           bypass and defeat bot-detection countermeasures.
-        </p>
+        </p> */}
+        <Link to="/subscribe">
+          <Button className="btn-success my-2">Subscribe Now</Button>
+        </Link>
       </Container>
       <Container>
         <Accordion
           defaultActiveKey="0"
           style={{ maxWidth: "800px", margin: "auto" }}
-          className="text-left"
+          className="text-left py-md-3"
         >
           <Accordion.Item eventKey="0">
             <Accordion.Header>

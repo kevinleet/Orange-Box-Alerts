@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import Home from "./Home";
 import HowItWorks from "./HowItWorks";
 import Footer from "./Footer";
+import NotFound from "../NotFound";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/howitworks" element={<HowItWorks />}></Route>
-        <Route path="*" element={<h1>404 Not Found</h1>}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />
     </Router>
