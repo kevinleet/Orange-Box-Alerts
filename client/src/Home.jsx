@@ -1,7 +1,6 @@
 import { Button, Container, Carousel } from "react-bootstrap";
 import image1 from "./images/home_1.jpg";
 import image2 from "./images/home_2.jpg";
-// import image3 from "./images/home_3.jpeg";
 import { Link } from "react-router-dom";
 
 const Home = () => {
