@@ -15,19 +15,18 @@ const HowItWorks = () => {
           undetectable web tool that programmatically accesses and scans the
           Hermes web store for product restocks.{" "}
         </h6>
-        {/* <p className="">
-          Hermes Alerter integrates the latest enterprise-grade technologies to
-          bypass and defeat bot-detection countermeasures.
-        </p> */}
+        <Link to="/pricing">
+          <Button className="btn-info mt-2 mx-3">Get Pricing Info</Button>
+        </Link>
         <Link to="/subscribe">
-          <Button className="btn-success mt-2 mb-4">Subscribe Now</Button>
+          <Button className="btn-success mt-2 mx-3">Subscribe Now</Button>
         </Link>
       </Container>
       <Container>
         <Accordion
           defaultActiveKey="0"
           style={{ maxWidth: "800px", margin: "auto" }}
-          className="text-left py-md-3"
+          className="text-left py-md-3 mt-3"
         >
           <Accordion.Item eventKey="0">
             <Accordion.Header>
