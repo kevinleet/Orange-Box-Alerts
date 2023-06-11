@@ -1,18 +1,21 @@
 {
   "files": {
     "main.css": "/static/css/main.27a3bc92.css",
-    "main.js": "/static/js/main.65ac40bc.js",
+    "main.js": "/static/js/main.acb21512.js",
     "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
-    "static/media/accordion_img1.jpg": "/static/media/accordion_img1.f932ab63a19dae8513a8.jpg",
-    "static/media/accordion_img3.jpeg": "/static/media/accordion_img3.92b1e202eba423009582.jpeg",
-    "static/media/accordion_img2.jpeg": "/static/media/accordion_img2.30b0d088cf6a25b357d4.jpeg",
+    "static/media/home_2.jpg": "/static/media/home_2.a3f034d5a5f4b9283596.jpg",
+    "static/media/home_1.jpg": "/static/media/home_1.db50e7af371bcb95b3bc.jpg",
+    "static/media/accordion_3.jpg": "/static/media/accordion_3.f932ab63a19dae8513a8.jpg",
+    "static/media/accordion_1.jpeg": "/static/media/accordion_1.92b1e202eba423009582.jpeg",
+    "static/media/home_3.jpeg": "/static/media/home_3.6eb8c8d32cf6334a0bcc.jpeg",
+    "static/media/accordion_2.jpeg": "/static/media/accordion_2.30b0d088cf6a25b357d4.jpeg",
     "index.html": "/index.html",
     "main.27a3bc92.css.map": "/static/css/main.27a3bc92.css.map",
-    "main.65ac40bc.js.map": "/static/js/main.65ac40bc.js.map",
+    "main.acb21512.js.map": "/static/js/main.acb21512.js.map",
     "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.27a3bc92.css",
-    "static/js/main.65ac40bc.js"
+    "static/js/main.acb21512.js"
   ]
 }

@@ -4,7 +4,7 @@ const Nav = () => {
   return (
     <nav className="navbar navbar-expand-md bg-body-tertiary">
       <span className="navbar-brand mx-4" style={{ cursor: "default" }}>
-        Hermés Alerter
+        Hermes Alerter
       </span>
       <button
         className="navbar-toggler"
