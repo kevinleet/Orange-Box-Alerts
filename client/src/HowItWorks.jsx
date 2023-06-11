@@ -7,20 +7,20 @@ import { Container, Accordion, Button } from "react-bootstrap";
 
 const HowItWorks = () => {
   return (
-    <Container className="bg-light mt-md-3 pt-3 rounded w-100 ">
+    <Container className="bg-light mt-md-3 py-3 rounded w-100 ">
       <Container style={{ maxWidth: "950px" }} className="text-center">
         <h2>How our technology works.</h2>
         <h6 className="lead">
           Our team of industry-leading software engineers have developed an
           undetectable web tool that programmatically accesses and scans the
-          Hermes.com web store for product restocks.{" "}
+          Hermes web store for product restocks.{" "}
         </h6>
         {/* <p className="">
           Hermes Alerter integrates the latest enterprise-grade technologies to
           bypass and defeat bot-detection countermeasures.
         </p> */}
         <Link to="/subscribe">
-          <Button className="btn-success my-2">Subscribe Now</Button>
+          <Button className="btn-success mt-2 mb-4">Subscribe Now</Button>
         </Link>
       </Container>
       <Container>

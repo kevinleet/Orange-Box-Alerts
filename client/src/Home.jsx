@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <Container className="bg-light mt-md-3 pt-3 rounded w-100 text-center">
+    <Container className="bg-light mt-md-3 py-3 rounded w-100 text-center">
       <Container>
         <h2>Add us to your wish list.</h2>
         <h5 className="lead">
