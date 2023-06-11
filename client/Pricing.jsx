@@ -24,11 +24,9 @@ const Pricing = () => {
             Hermes Alerter Monthly Subscription - $15
           </Card.Title>
           <Card.Text>
-            <p className="my-0">
-              Unlimited access to restock alerts, delivered instantly to your
-              inbox. Personalize your notifications based on your interests, to
-              get alerts for the products that matter most to you.
-            </p>
+            Unlimited access to restock alerts, delivered instantly to your
+            inbox. Personalize your notifications based on your interests, to
+            get alerts for the products that matter most to you.
           </Card.Text>
           <Link to="/subscribe">
             <Button

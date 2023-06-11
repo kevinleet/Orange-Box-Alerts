@@ -16,17 +16,17 @@ const HowItWorks = () => {
           Hermes web store for product restocks.{" "}
         </h6>
         <Link to="/pricing">
-          <Button className="btn-info mt-2 mx-3">Get Pricing Info</Button>
+          <Button className="btn-info mt-3 me-2">Get Pricing Info</Button>
         </Link>
         <Link to="/subscribe">
-          <Button className="btn-success mt-2 mx-3">Subscribe Now</Button>
+          <Button className="btn-success mt-3 ms-2">Subscribe Now</Button>
         </Link>
       </Container>
       <Container>
         <Accordion
           defaultActiveKey="0"
           style={{ maxWidth: "800px", margin: "auto" }}
-          className="text-left py-md-3 mt-3"
+          className="text-left py-md-3 mt-4"
         >
           <Accordion.Item eventKey="0">
             <Accordion.Header>
