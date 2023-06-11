@@ -21,7 +21,7 @@ const Pricing = () => {
         <Card style={{ "width:": "18rem" }} className="p-3">
           <Card.Img></Card.Img>
           <Card.Title className="lead">
-            Hermes Alerter Monthly Subscription - $15
+            🍊 Orange Box Alerts Monthly Subscription - $15
           </Card.Title>
           <Card.Text>
             Unlimited access to restock alerts, delivered instantly to your

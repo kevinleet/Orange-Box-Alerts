@@ -23,7 +23,7 @@ const NavigationBar = () => {
     >
       <Container fluid>
         <Navbar.Brand as={NavLink} to="/" style={{ color: "#f37021" }}>
-          Hermes Alerter
+          🍊 Orange Box Alerts
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarSupportedContent" />
         <Navbar.Collapse id="navbarSupportedContent" className="navbar-hover">

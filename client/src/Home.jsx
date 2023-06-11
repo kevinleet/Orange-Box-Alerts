@@ -9,7 +9,7 @@ const Home = () => {
       <Container>
         <h2>Add us to your wish list.</h2>
         <h5 className="lead">
-          Hermes Alerter is so good, you won't tell your friends about it.
+          Orange Box Alerts is so good, you won't tell your friends about it.
         </h5>
         <p>
           Utilizing advanced enterprise anti-detection technologies to deliver
