@@ -17,7 +17,7 @@ app.use(logger("dev"));
 app.use("/api", Router);
 
 // Serve static files from the 'build' directory
-app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "client/dist")));
 
 // Handle all other requests
 app.get("*", (req, res) => {
