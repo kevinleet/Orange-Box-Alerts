@@ -22,7 +22,7 @@ const NavigationBar = () => {
       className="bg-light"
     >
       <Container fluid>
-        <Navbar.Brand as={NavLink} to="/">
+        <Navbar.Brand as={NavLink} to="/" style={{ color: "#f37021" }}>
           Hermes Alerter
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarSupportedContent" />
