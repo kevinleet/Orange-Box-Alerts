@@ -8,8 +8,9 @@ const scraper = require("./app/scraper");
 const sendMail = require("./app/nodemailer");
 const alerter = require("./app/alerter");
 const path = require("path");
-
-const { Restock, Product } = require("./models");
+const stripe = require("stripe")(
+  "sk_test_51NII8dEnnrWrEekPRDkU0hJzcBSXmnrBLZGl3GDGzYXeUqwc5X9eSeiio6Bti5xG5wmQO8ila9yRyT6jyAXjnB3i00yqJk0SyJ"
+);
 
 const PORT = process.env.PORT || 3001;
 const app = express();

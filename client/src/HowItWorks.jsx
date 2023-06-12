@@ -15,11 +15,11 @@ const HowItWorks = () => {
           undetectable web tool that programmatically accesses and scans the
           Hermes web store for product restocks.{" "}
         </h6>
-        <Link to="/pricing">
-          <Button className="btn-info mt-3 me-2">Get Pricing Info</Button>
+        <Link to="/recentrestocks">
+          <Button className="btn-info mt-3 me-2">Recent Restocks</Button>
         </Link>
-        <Link to="/subscribe">
-          <Button className="btn-success mt-3 ms-2">Subscribe Now</Button>
+        <Link to="/pricing">
+          <Button className="btn-success mt-3 ms-2">Pricing Info</Button>
         </Link>
       </Container>
       <Container>
