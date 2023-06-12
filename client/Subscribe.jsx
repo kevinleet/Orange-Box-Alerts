@@ -1,8 +1,36 @@
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import { useEffect } from "react";
+import { loadGapiInsideDOM as gapiLoad } from "gapi-script";
+import Login from "./src/components/Login";
+import Logout from "./src/components/Logout";
 
 const Subscribe = () => {
+  useEffect(() => {
+    function loadGoogleAPI() {
+      gapiLoad("client", initGoogleClient);
+    }
+    function initGoogleClient() {
+      console.log("error");
+      gapi.client.init({
+        clientId:
+          "550761020124-i556iaj3l2j98erpakq9nor5539tbnmn.apps.googleusercontent.com",
+        scope: "",
+      });
+    }
+    loadGoogleAPI();
+  }, []);
   return (
-    <Container className="bg-light mt-md-3 py-3 rounded w-100">
+    <Container className="bg-light mt-md-3 py-3 rounded w-100 text">
+      <Container className="d-flex justify-content-center align-items-center">
+        <Row style={{ maxWidth: "500px" }}>
+          <Col>
+            <Login />
+          </Col>
+          <Col>
+            <Logout />
+          </Col>
+        </Row>
+      </Container>
       <Form style={{ maxWidth: "600px", margin: "auto" }}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>

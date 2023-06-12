@@ -9,6 +9,16 @@ const getAllRestocks = async (req, res) => {
   }
 };
 
+const getMostRecentRestock = async (req, res) => {
+  try {
+    let product = await Restock.findOne().sort({ date_unix: -1 });
+    res.json(product);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 module.exports = {
   getAllRestocks,
+  getMostRecentRestock,
 };

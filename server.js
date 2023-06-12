@@ -9,6 +9,8 @@ const sendMail = require("./app/nodemailer");
 const alerter = require("./app/alerter");
 const path = require("path");
 
+const { Restock, Product } = require("./models");
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 

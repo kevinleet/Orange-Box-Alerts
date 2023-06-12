@@ -1,4 +1,4 @@
-const { Schema, SchemaType } = require("mongoose");
+const { Schema } = require("mongoose");
 
 const alertSchema = new Schema(
   {
