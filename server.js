@@ -1,6 +1,7 @@
 const express = require("express");
 const Router = require("./routes/AppRouter");
 const logger = require("morgan");
+const cors = require("cors");
 const env = require("dotenv").config();
 const db = require("./db");
 const scraper = require("./app/scraper");
@@ -13,6 +14,7 @@ const app = express();
 
 app.use(express.json());
 app.use(logger("dev"));
+app.use(cors());
 
 app.use("/api", Router);
 

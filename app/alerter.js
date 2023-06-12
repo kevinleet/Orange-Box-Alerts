@@ -52,7 +52,7 @@ const run = async () => {
         }
       }
     }
-  }, 30000);
+  }, 5000);
 };
 
 module.exports = {

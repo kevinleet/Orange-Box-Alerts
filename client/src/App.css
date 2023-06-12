@@ -10,3 +10,9 @@
 .small-text {
   font-size: 1vh;
 }
+
+.card-image {
+  height: 200px; /* Adjust the height as per your requirement */
+  object-fit: contain; /* Ensure the image fills the container */
+  /* background-color: #e6dfdb; */
+}
