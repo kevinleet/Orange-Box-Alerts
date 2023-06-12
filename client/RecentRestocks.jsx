@@ -27,7 +27,11 @@ const RecentRestocks = () => {
   }
 
   return (
-    <Container className="bg-light mt-md-3 py-3 rounded w-100 ">
+    <Container className="bg-light mt-md-3 py-3 rounded w-100 text-center">
+      <h2>Don't miss the next restock.</h2>
+      <Link to="/subscribe">
+        <Button className="btn-success mt-1 mb-2 ms-2">Subscribe Now</Button>
+      </Link>
       <Container className=" pt-md-3 text-center">
         <h1 className="lead">
           <strong>Last Restock:</strong>{" "}

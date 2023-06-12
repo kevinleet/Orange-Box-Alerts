@@ -21,7 +21,7 @@ const Subscribe = () => {
   }, []);
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 text">
-      <Container className="d-flex justify-content-center align-items-center">
+      <Container className="d-flex justify-content-center align-items-center mb-2">
         <Row style={{ maxWidth: "500px" }}>
           <Col>
             <Login />
