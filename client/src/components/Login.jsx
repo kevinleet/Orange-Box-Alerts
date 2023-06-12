@@ -1,8 +1,10 @@
 import GoogleLogin from "react-google-login";
+import { useState } from "react";
 
-function Login() {
+function Login({ onLoginSuccess }) {
   const onSuccess = (res) => {
-    console.log(`Login Success! Current User: ${res.profileObj}`);
+    console.log(`Login Success!`);
+    onLoginSuccess(res);
   };
 
   const onFailure = (res) => {
