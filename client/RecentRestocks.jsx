@@ -32,7 +32,7 @@ const RecentRestocks = () => {
           <Card key={item.sku} style={{ width: "18rem" }} className="m-2 p-3">
             <Card.Img
               variant="top"
-              src={`http://${item.assets[0].url.slice(2)}`}
+              src={`https://${item.assets[0].url.slice(2)}`}
               className="card-image"
             ></Card.Img>
             <Card.Body>
