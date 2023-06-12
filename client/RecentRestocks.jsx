@@ -8,7 +8,7 @@ const RecentRestocks = () => {
   useEffect(() => {
     const fetchRestock = async () => {
       try {
-        let response = await axios.get("http://localhost:3001/api/restocks");
+        let response = await axios.get("/api/restocks");
         setRestock(response.data);
       } catch (error) {
         console.log(error);
