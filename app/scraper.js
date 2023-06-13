@@ -31,8 +31,8 @@ const run = async () => {
         products: products,
       });
       await newRestock.save();
-    } else if (Date.now() - lastRestock.date_unix > 172800000) {
-      console.log("Restock data is over 2 days old. Updating database...");
+    } else if (Date.now() - lastRestock.date_unix > 86400000) {
+      console.log("Restock data is over 1 day old. Updating database...");
       const newRestock = new Restock({
         date_unix: Date.now(),
         quantity: products.length,

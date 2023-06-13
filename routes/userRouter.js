@@ -4,5 +4,7 @@ const controller = require("../controllers/userController");
 
 Router.get("/", controller.getAllUsers);
 Router.post("/", controller.createUser);
+Router.put("/1", controller.updateAllRestocks);
+Router.put("/2", controller.updateProductAlerts);
 
 module.exports = Router;

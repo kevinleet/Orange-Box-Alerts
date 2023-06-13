@@ -1,4 +1,13 @@
-import { Container, Button, Tab, Tabs, ListGroup, Card } from "react-bootstrap";
+import {
+  Container,
+  Button,
+  Tab,
+  Tabs,
+  ListGroup,
+  Card,
+  Row,
+  Col,
+} from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -35,27 +44,29 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   }
   async function getDatabaseData() {
     let response = await axios.get(`api/users?email=${userData.email}`);
-    const { subscription_active, notify_all_restocks, products_to_alert } =
+    const { _id, subscription_active, notify_all_restocks, productsToAlert } =
       response.data[0];
-    if (!products_to_alert) {
+    if (productsToAlert.length == 0) {
       setDbData({
+        id: _id,
         subscription_active: subscription_active,
         notify_all_restocks: notify_all_restocks,
         products_to_alert: [],
       });
     } else {
       setDbData({
+        id: _id,
         subscription_active: subscription_active,
         notify_all_restocks: notify_all_restocks,
-        products_to_alert: products_to_alert,
+        products_to_alert: productsToAlert,
       });
     }
   }
 
   async function enableAllRestocks() {
     try {
-      console.log("enabling all restocks");
-      await axios.put(`api/users/${userData.email}`, {
+      await axios.put(`api/users/1`, {
+        email: userData.email,
         notify_all_restocks: "true",
       });
       getDatabaseData();
@@ -65,8 +76,8 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   }
   async function disableAllRestocks() {
     try {
-      console.log("disabling all restocks");
-      await axios.put(`api/users/${userData.email}`, {
+      await axios.put(`api/users/1`, {
+        email: userData.email,
         notify_all_restocks: "false",
       });
       getDatabaseData();
@@ -75,17 +86,37 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
     }
   }
 
-  async function enableProductAlert(product) {
+  async function enableProductAlert(id) {
     try {
-      console.log("adding product alert to user");
+      await axios.put(`api/users/2`, {
+        email: userData.email,
+        action: "add",
+        product: id,
+      });
+      await axios.put("api/products", {
+        action: "add",
+        product: id,
+        user: dbData.id,
+      });
+      getDatabaseData();
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function disableProductAlert(product) {
+  async function disableProductAlert(id) {
     try {
-      console.log("removing product alert to user");
+      await axios.put(`api/users/2`, {
+        email: userData.email,
+        action: "remove",
+        product: id,
+      });
+      await axios.put("api/products", {
+        action: "remove",
+        product: id,
+        user: dbData.id,
+      });
+      getDatabaseData();
     } catch (error) {
       console.log(error);
     }
@@ -102,6 +133,7 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
     };
     fetchProducts();
   }, []);
+
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 ">
       <Tabs
@@ -140,62 +172,82 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
           // disabled
         >
           <Container>
-            <Container className="mt-4">
-              <Card style={{ width: "20rem" }}>
-                <Card.Body>
-                  <Card.Title>
-                    Notify All Restocks{" "}
-                    {dbData.notify_all_restocks == "false" ? (
-                      <span style={{ color: "red" }}>(Disabled)</span>
-                    ) : (
-                      <span style={{ color: "green" }}>(Enabled)</span>
-                    )}
-                  </Card.Title>
-                  <Card.Text>
-                    Enable instant email notifications for all product restocks!
-                  </Card.Text>
-                  {dbData.notify_all_restocks == "false" ? (
-                    <Button variant="secondary" onClick={enableAllRestocks}>
-                      Enable
-                    </Button>
-                  ) : (
-                    <Button variant="success" onClick={disableAllRestocks}>
-                      Disable
-                    </Button>
-                  )}
-                </Card.Body>
-              </Card>
-            </Container>
-            <hr />
-
-            <Container>
-              {products.map((item) => (
-                <Card style={{ width: "20rem" }}>
+            <Container className="mt-4 text-center">
+              <Row className="justify-content-center">
+                <Card style={{ width: "24rem" }}>
                   <Card.Body>
                     <Card.Title>
-                      {item.name}{" "}
-                      {dbData.notify_all_restocks.includes(item.name) ? (
-                        <span style={{ color: "green" }}>(Enabled)</span>
-                      ) : (
+                      Notify All Restocks{" "}
+                      {dbData.notify_all_restocks != "true" ? (
                         <span style={{ color: "red" }}>(Disabled)</span>
+                      ) : (
+                        <span style={{ color: "green" }}>(Enabled)</span>
                       )}
                     </Card.Title>
                     <Card.Text>
-                      Enable instant email notifications for all{" "}
-                      <strong>{item.name}</strong> restocks!
+                      Enable instant email notifications for all product
+                      restocks!
                     </Card.Text>
-                    {dbData.notify_all_restocks.includes(item.name) ? (
-                      <Button variant="success" onClick={disableProductAlert}>
-                        Disable
+                    {dbData.notify_all_restocks != "true" ? (
+                      <Button variant="success" onClick={enableAllRestocks}>
+                        Enable
                       </Button>
                     ) : (
-                      <Button variant="secondary" onClick={enableProductAlert}>
-                        Enable
+                      <Button
+                        variant="secondary"
+                        className="btn-sm"
+                        onClick={disableAllRestocks}
+                      >
+                        Disable
                       </Button>
                     )}
                   </Card.Body>
                 </Card>
-              ))}
+              </Row>
+            </Container>
+            <hr />
+
+            <Container>
+              <Row className="justify-content-center text-center">
+                {products.map((item) => (
+                  <Card style={{ width: "16rem" }} className="m-3">
+                    <Card.Body>
+                      <Card.Title>
+                        <span className="fs-6">
+                          {item.name}{" "}
+                          {dbData.products_to_alert.includes(item._id) ? (
+                            <span style={{ color: "green" }}>(Enabled)</span>
+                          ) : (
+                            <span style={{ color: "red" }}>(Disabled)</span>
+                          )}
+                        </span>
+                      </Card.Title>
+                      <Card.Text>
+                        <span className="small-text">
+                          Enable instant email notifications for all{" "}
+                          <strong>{item.name}</strong> restocks!
+                        </span>
+                      </Card.Text>
+                      {dbData.products_to_alert.includes(item._id) ? (
+                        <Button
+                          variant="secondary"
+                          className="btn-sm"
+                          onClick={() => disableProductAlert(item._id)}
+                        >
+                          Disable
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="success"
+                          onClick={() => enableProductAlert(item._id)}
+                        >
+                          Enable
+                        </Button>
+                      )}
+                    </Card.Body>
+                  </Card>
+                ))}
+              </Row>
             </Container>
           </Container>
         </Tab>
@@ -212,7 +264,7 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <strong>Subscription Status: </strong>
-                {dbData.subscription_active == "false" ? (
+                {dbData.subscription_active != "true" ? (
                   <span style={{ color: "red" }}>Not Active</span>
                 ) : (
                   <span style={{ color: "green" }}>Active</span>
@@ -220,7 +272,7 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <strong>Notify All Restocks: </strong>
-                {dbData.notify_all_restocks == "false" ? (
+                {dbData.notify_all_restocks != "true" ? (
                   <span style={{ color: "red" }}>False</span>
                 ) : (
                   <span style={{ color: "green" }}>True</span>

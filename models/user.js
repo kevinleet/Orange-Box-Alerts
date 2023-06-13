@@ -7,7 +7,7 @@ const userSchema = new Schema(
     last_name: { type: String, required: true },
     subscription_active: { type: String, required: true },
     notify_all_restocks: { type: String, required: true },
-    productsToAlert: [{ type: Schema.Types.ObjectId, ref: "Product" }],
+    productsToAlert: [{ type: Schema.Types.ObjectId, required: true }],
   },
   { timestamps: true }
 );
