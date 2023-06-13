@@ -28,7 +28,7 @@ const Pricing = () => {
             inbox. Personalize your notifications based on your interests, to
             get alerts for the products that matter most to you.
           </Card.Text>
-          <Link to="/subscribe">
+          <Link to="/login">
             <Button
               style={{ maxWidth: "200px", margin: "auto" }}
               className="btn-success"

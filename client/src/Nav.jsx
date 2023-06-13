@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-const NavigationBar = () => {
+const NavigationBar = ({ isLoggedIn }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleToggle = () => {
@@ -44,11 +44,20 @@ const NavigationBar = () => {
             <Nav.Link as={NavLink} to="/pricing" className="mx-2">
               Pricing
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/subscribe" className="mx-2">
-              <Button variant="outline-success" size="sm">
-                Subscribe
-              </Button>
-            </Nav.Link>
+
+            {isLoggedIn ? (
+              <Nav.Link as={NavLink} to="/userpanel" className="mx-2">
+                <Button variant="primary" size="sm">
+                  User Panel
+                </Button>
+              </Nav.Link>
+            ) : (
+              <Nav.Link as={NavLink} to="/login" className="mx-2">
+                <Button variant="outline-success" size="sm">
+                  Log In
+                </Button>
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

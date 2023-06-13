@@ -7,18 +7,49 @@ import Footer from "./Footer";
 import NotFound from "../NotFound";
 import RecentRestocks from "../RecentRestocks";
 import Pricing from "../Pricing";
-import Subscribe from "../Subscribe";
+import Login from "../Login";
+import { useState } from "react";
+import UserPanel from "../UserPanel";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({
+    email: "",
+    name: "",
+    given_name: "",
+    family_name: "",
+  });
+
   return (
     <Router>
-      <Nav />
+      <Nav isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/howitworks" element={<HowItWorks />}></Route>
         <Route path="/recentrestocks" element={<RecentRestocks />}></Route>
         <Route path="/pricing" element={<Pricing />}></Route>
-        <Route path="/subscribe" element={<Subscribe />}></Route>
+        <Route
+          path="/login"
+          element={
+            <Login
+              userData={userData}
+              setUserData={setUserData}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          }
+        ></Route>
+        <Route
+          path="/userpanel"
+          element={
+            <UserPanel
+              userData={userData}
+              setUserData={setUserData}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          }
+        ></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />
