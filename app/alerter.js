@@ -56,7 +56,7 @@ const run = async () => {
     } catch (error) {
       console.log(error);
     }
-  }, 5000);
+  }, 120000);
 };
 
 module.exports = {
