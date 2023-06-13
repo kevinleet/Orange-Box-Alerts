@@ -12,7 +12,7 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/");
+      navigate("/login");
     } else {
       getDatabaseData();
     }
@@ -57,14 +57,14 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
               subscriptions, providing our consumers with a secure and
               hassle-free experience, thanks to Stripe's robust security
               measures and user-friendly interface.
-              <br />
-              <br />
+            </h6>
+            <p className="fs-6 mt-3">
               Once your payment is successfully processed, your account status
               will be updated to 'active,' granting you access to customize your
               notification settings. You will then start receiving restock alert
               notifications promptly whenever they occur. This ensures that you
               never miss out on any important updates!
-            </h6>
+            </p>
           </Container>
           <Container className="d-flex justify-content-center mt-5">
             <stripe-buy-button
