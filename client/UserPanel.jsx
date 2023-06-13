@@ -58,7 +58,7 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
       await axios.put(`api/users/${userData.email}`, {
         notify_all_restocks: "true",
       });
-      setDbData({ notify_all_restocks: "true" });
+      getDatabaseData();
     } catch (error) {
       console.log(error);
     }
@@ -69,15 +69,27 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
       await axios.put(`api/users/${userData.email}`, {
         notify_all_restocks: "false",
       });
-      setDbData({ notify_all_restocks: "false" });
+      getDatabaseData();
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function enableProductAlert() {}
+  async function enableProductAlert(product) {
+    try {
+      console.log("adding product alert to user");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  async function disableProductAlert() {}
+  async function disableProductAlert(product) {
+    try {
+      console.log("removing product alert to user");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     const fetchProducts = async () => {
