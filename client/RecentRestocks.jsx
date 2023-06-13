@@ -44,6 +44,7 @@ const RecentRestocks = () => {
                   <Carousel.Item>
                     <img
                       className="d-block w-100"
+                      style={{ maxHeight: "262px" }}
                       src={`https://${img.url.slice(2)}`}
                     />
                   </Carousel.Item>
