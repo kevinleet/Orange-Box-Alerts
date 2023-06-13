@@ -4,16 +4,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
-  const [dbUserData, setDbUserData] = useState({});
+  const [dbData, setDbData] = useState({
+    subscription_active: "",
+    notify_all_restocks: "",
+    products_to_alert: "",
+  });
   const navigate = useNavigate();
-  useEffect(async () => {
+  useEffect(() => {
     if (!isLoggedIn) {
       navigate("/");
     } else {
-      let response = await axios.get(`/api/users?email=${userData.email}`);
-      const { subscription_active, notifyAllRestocks, productsToAlert } =
-        response.data[0];
-      setDbUserData({ subscription_active: subscription_active });
+      getDatabaseData();
     }
   }, [isLoggedIn]);
   function logOut() {
@@ -23,7 +24,23 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
       given_name: "",
       family_name: "",
     });
+    setDbData({
+      subscription_active: "",
+      notify_all_restocks: "",
+      products_to_alert: "",
+    });
+
     setIsLoggedIn(false);
+  }
+  async function getDatabaseData() {
+    let response = await axios.get(`api/users?email=${userData.email}`);
+    const { subscription_active, notify_all_restocks, products_to_alert } =
+      response.data[0];
+    setDbData({
+      subscription_active: subscription_active,
+      notify_all_restocks: notify_all_restocks,
+      products_to_alert: products_to_alert,
+    });
   }
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 ">
@@ -40,14 +57,14 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
               subscriptions, providing our consumers with a secure and
               hassle-free experience, thanks to Stripe's robust security
               measures and user-friendly interface.
+              <br />
+              <br />
+              Once your payment is successfully processed, your account status
+              will be updated to 'active,' granting you access to customize your
+              notification settings. You will then start receiving restock alert
+              notifications promptly whenever they occur. This ensures that you
+              never miss out on any important updates!
             </h6>
-            <br />
-            <p>
-              Once your payment is successfully processed, your subscription
-              will be activated within 24 hours. Once activated, you will start
-              receiving restock alert notifications whenever they occur,
-              ensuring you never miss out!
-            </p>
           </Container>
           <Container className="d-flex justify-content-center mt-5">
             <stripe-buy-button
@@ -76,18 +93,22 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <strong>Subscription Status: </strong>
-                {dbUserData.subscription_active ? (
-                  <p style={{ color: "green" }}>Active</p>
+                {dbData.subscription_active == "false" ? (
+                  <span style={{ color: "red" }}>Not Active</span>
                 ) : (
-                  <p style={{ color: "red" }}>Not Active</p>
+                  <span style={{ color: "green" }}>Active</span>
                 )}
               </ListGroup.Item>
               <ListGroup.Item>
                 <strong>Notify All Restocks: </strong>
-                {dbUserData.notifyAllRestocks ? "Enabled" : "Disabled"}
+                {dbData.notify_all_restocks == "false" ? (
+                  <span style={{ color: "red" }}>False</span>
+                ) : (
+                  <span style={{ color: "green" }}>True</span>
+                )}
               </ListGroup.Item>
               <ListGroup.Item>
-                <strong>Products To Alert</strong>
+                <strong>Products To Alert: </strong>
               </ListGroup.Item>
             </ListGroup>
           </Container>

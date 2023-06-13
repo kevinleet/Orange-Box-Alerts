@@ -21,6 +21,7 @@ const createUser = async (req, res) => {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       subscription_active: false,
+      notify_all_restocks: false,
     });
   } catch (error) {
     res.send(error);

@@ -29,9 +29,6 @@ const Login = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
           email: email,
           first_name: given_name,
           last_name: family_name,
-          subscription_active: false,
-          notifyAllRestocks: false,
-          productsToAlert: [],
         });
       } else {
         console.log("Returning user detected.");
