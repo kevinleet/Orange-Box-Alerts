@@ -29,8 +29,8 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
       notify_all_restocks: "",
       products_to_alert: "",
     });
-
     setIsLoggedIn(false);
+    localStorage.setItem("isLoggedIn", "false");
   }
   async function getDatabaseData() {
     let response = await axios.get(`api/users?email=${userData.email}`);

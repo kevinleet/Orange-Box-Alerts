@@ -8,7 +8,7 @@ import NotFound from "../NotFound";
 import RecentRestocks from "../RecentRestocks";
 import Pricing from "../Pricing";
 import Login from "../Login";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UserPanel from "../UserPanel";
 
 function App() {
@@ -19,6 +19,17 @@ function App() {
     given_name: "",
     family_name: "",
   });
+
+  useEffect(() => {
+    const loggedInState = localStorage.getItem("isLoggedIn");
+    const email = localStorage.getItem("email");
+    const name = localStorage.getItem("name");
+    const given_name = localStorage.getItem("given_name");
+    if (loggedInState == "true") {
+      setIsLoggedIn(true);
+      setUserData({ email: email, name: name, given_name: given_name });
+    }
+  }, []);
 
   return (
     <Router>

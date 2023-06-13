@@ -78,6 +78,10 @@ const Login = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
                 });
                 setIsLoggedIn(true);
                 createUser(email, given_name, family_name);
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("email", email);
+                localStorage.setItem("name", name);
+                localStorage.setItem("given_name", given_name);
               }}
               onError={() => {
                 console.log("Login Failed");
