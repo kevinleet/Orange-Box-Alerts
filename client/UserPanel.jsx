@@ -1,12 +1,19 @@
-import { Container, Button, Tab, Tabs } from "react-bootstrap";
-import { useEffect } from "react";
+import { Container, Button, Tab, Tabs, ListGroup } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
+  const [dbUserData, setDbUserData] = useState({});
   const navigate = useNavigate();
-  useEffect(() => {
+  useEffect(async () => {
     if (!isLoggedIn) {
       navigate("/");
+    } else {
+      let response = await axios.get(`/api/users?email=${userData.email}`);
+      const { subscription_active, notifyAllRestocks, productsToAlert } =
+        response.data[0];
+      setDbUserData({ subscription_active: subscription_active });
     }
   }, [isLoggedIn]);
   function logOut() {
@@ -56,8 +63,34 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
         >
           Tab content for Alerts
         </Tab>
-        <Tab eventKey="profile" title="Profile" disabled>
-          Tab content for Profile
+        <Tab eventKey="profile" title="Profile">
+          <Container>
+            <ListGroup>
+              <ListGroup.Item>
+                <strong>Email: </strong>
+                {userData.email}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <strong>Name: </strong>
+                {userData.name}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <strong>Subscription Status: </strong>
+                {dbUserData.subscription_active ? (
+                  <p style={{ color: "green" }}>Active</p>
+                ) : (
+                  <p style={{ color: "red" }}>Not Active</p>
+                )}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <strong>Notify All Restocks: </strong>
+                {dbUserData.notifyAllRestocks ? "Enabled" : "Disabled"}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <strong>Products To Alert</strong>
+              </ListGroup.Item>
+            </ListGroup>
+          </Container>
         </Tab>
       </Tabs>
       <Container className="d-flex justify-content-center mt-4">
