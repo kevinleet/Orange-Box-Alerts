@@ -8,6 +8,7 @@ import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
 import google from "./src/images/google.webp";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -19,6 +20,24 @@ const Login = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
     }
   }, [isLoggedIn]);
 
+  async function createUser(email, given_name, family_name) {
+    try {
+      let response = await axios.get(`/api/users?email=${email}`);
+      console.log(response);
+      if (response.data.length == 0) {
+        console.log("New user detected.");
+        await axios.post("api/users", {
+          email: email,
+          first_name: given_name,
+          last_name: family_name,
+        });
+      } else {
+        console.log("Returning user detected.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 text d-flex flex-column align-items-center justify-content-center">
       <Container style={{ maxWidth: "950px" }} className="text-center">
@@ -59,6 +78,7 @@ const Login = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
                   family_name: family_name,
                 });
                 setIsLoggedIn(true);
+                createUser(email, given_name, family_name);
               }}
               onError={() => {
                 console.log("Login Failed");
