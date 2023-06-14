@@ -39,7 +39,7 @@ const RecentRestocks = () => {
               style={{ width: "18rem" }}
               className="m-2 pt-3 pb-0"
             >
-              <Carousel>
+              <Carousel interval={null}>
                 {item.assets.map((img) => (
                   <Carousel.Item>
                     <img
