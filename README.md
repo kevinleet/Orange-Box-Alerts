@@ -11,7 +11,6 @@ This application was developed in just one week and is currently fully deployed 
 - User authentication: Users can log in to the application using their Google accounts via OAuth 2.0.
 - Subscription management: Users can subscribe to product restock alerts, enabling them to receive notifications when products become available.
 - Payment integration: Stripe integration allows users to securely make payments for subscription plans.
-- Customizable notification settings: Users can customize their notification preferences, such as preferred delivery methods (email, SMS, etc.) and frequency of alerts.
 - Automated restock scanning: The application frequently scans the Hermes web store for new product restocks, ensuring timely notifications to subscribed users.
 - Responsive user interface: The application provides an intuitive and user-friendly interface built with React and Bootstrap, making it accessible across various devices.
 
@@ -30,14 +29,14 @@ Orange Box Alerts utilizes the following technologies:
 - **Railway**: A hosting platform for deploying web applications, simplifying the deployment process and providing scalable infrastructure.
 - **Zenrows**: A module employed to defeat any anti-bot detection measures implemented by the Hermes web store, ensuring accurate restock notifications.
 
-Orange Box Alerts, with the help of Zenrows, effectively scans the Hermes web store for new product restocks and provides users with reliable and real-time restock notifications.
+Orange Box Alerts effectively scans the Hermes web store for new product restocks and provides users with reliable and real-time restock notifications.
 
 Happy restock alerts with Orange Box Alerts!
 
 ## ERD Diagram
 
-![ERD Diagram](https://github.com/kevinleet/hermes_alerter/blob/main/hermes_alerter_erd.drawio.png)
+![ERD Diagram](https://github.com/kevinleet/Orange-Box-Alerts/blob/main/orange_box_alerts.drawio.png?raw=true)
 
 ## Trello Board
 
-[Trello Board](https://trello.com/b/SDWqp7Rf/hermes-alerter)
+[Trello Board](https://trello.com/b/SDWqp7Rf/orange-box-alerts)
