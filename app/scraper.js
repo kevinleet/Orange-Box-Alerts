@@ -3,7 +3,7 @@ const { ZENROWS_API } = require("../config");
 const { Restock, Product, Alert, User } = require("../models/");
 const sendMail = require("./nodemailer");
 
-// Function that checks for new restocks and updates restock data that is over 24 hours old
+// Function that checks for new restocks, which are defined as more products than the most recent restock in db (updated hourly)
 async function restockHandler(products) {
   try {
     let lastRestock = await Restock.findOne().sort({ date_unix: -1 });
@@ -16,16 +16,16 @@ async function restockHandler(products) {
       });
       await newRestock.save();
       emailRestockAlerts(products);
-    } else if (Date.now() - lastRestock.date_unix > 86400000) {
-      console.log("Restock data is over 1 day old. Updating database...");
+    } else if (Date.now() - lastRestock.date_unix > 3600000) {
+      console.log(
+        "No restock detected. Pushing current products to db/restocks."
+      );
       const newRestock = new Restock({
         date_unix: Date.now(),
         quantity: products.length,
         products: products,
       });
       await newRestock.save();
-    } else {
-      console.log("No restock detected.");
     }
   } catch (error) {
     console.log(error);
@@ -51,6 +51,7 @@ async function emailRestockAlerts(products) {
   }
 }
 
+// Function to email users with individual product alerts
 async function productAlertHandler(products) {
   try {
     let productsFound = products;
