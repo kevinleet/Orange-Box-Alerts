@@ -174,12 +174,14 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
       try {
         const response = await axios.get("/api/users");
         setUsers(response.data);
-        for (const user of response.data) {
-          setSubscriptionStatus({
-            ...subscriptionStatus,
-            [user._id]: user.subscription_active,
-          });
-        }
+        console.log(response.data);
+        setSubscriptionStatus((prevStatus) => {
+          const newStatus = { ...prevStatus };
+          for (const user of response.data) {
+            newStatus[user._id] = user.subscription_active;
+          }
+          return newStatus;
+        });
       } catch (error) {
         console.log(error);
       }
@@ -386,6 +388,7 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
                           <td>{user.first_name}</td>
                           <td>{user.last_name}</td>
                           <td>
+                            {console.log(subscriptionStatus)}
                             {subscriptionStatus[user._id] != "true"
                               ? "Not Active"
                               : "Active"}
