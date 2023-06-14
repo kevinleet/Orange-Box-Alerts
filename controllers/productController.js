@@ -29,7 +29,31 @@ const updateUsersToAlert = async (req, res) => {
   }
 };
 
+const addProduct = async (req, res) => {
+  try {
+    let product = await Product.create({
+      name: req.body.name,
+    });
+    res.send(product);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const removeProduct = async (req, res) => {
+  try {
+    let product = await Product.findOneAndDelete({
+      name: req.body.name,
+    });
+    res.send(product);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAllProducts,
   updateUsersToAlert,
+  addProduct,
+  removeProduct,
 };

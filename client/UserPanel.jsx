@@ -7,12 +7,14 @@ import {
   Card,
   Row,
   Table,
+  Form,
 } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
+  const [productToAdd, setProductToAdd] = useState("");
   const [users, setUsers] = useState([]);
   const [subscriptionStatus, setSubscriptionStatus] = useState({});
   const [products, setProducts] = useState([]);
@@ -172,20 +174,51 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
       try {
         const response = await axios.get("/api/users");
         setUsers(response.data);
-        // console.log()
         for (const user of response.data) {
           setSubscriptionStatus({
             ...subscriptionStatus,
             [user._id]: user.subscription_active,
           });
         }
-        console.log(subscriptionStatus);
       } catch (error) {
         console.log(error);
       }
     };
     getAllUsers();
   }, []);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    console.log("handle submit triggered");
+    console.log(event.target);
+    try {
+      if (event.target.name == "add") {
+        console.log('add detected"');
+        await axios.post("/api/products", {
+          name: productToAdd,
+        });
+      } else if (event.target.name == "remove") {
+        console.log("remove detected");
+        console.log(`removing: ${productToAdd}`);
+        await axios.delete("/api/products", {
+          data: { name: productToAdd },
+        });
+      }
+      setProductToAdd("");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // async function removeProduct(event) {
+  //   event.preventDefault();
+
+  //   try {
+
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 ">
@@ -377,8 +410,43 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
                     </tbody>
                   </Table>
                 </Tab>
-                <Tab eventKey="add_products" title="Add Alertable Products">
-                  Tab content for Profile
+                <Tab eventKey="add_products" title="Manage Alertable Products">
+                  <Container
+                    style={{ maxWidth: "950px" }}
+                    className="text-center d-flex flex-column align-items-center justify-content-center py-5 m-2"
+                  >
+                    <Form>
+                      <Form.Group
+                        style={{ maxWidth: "400px" }}
+                        className="mb-3"
+                      >
+                        <Form.Label>Product Name</Form.Label>
+                        <Form.Control
+                          placeholder="Enter product name"
+                          onChange={(e) => setProductToAdd(e.target.value)}
+                          value={productToAdd}
+                        />
+                      </Form.Group>
+                      <Button
+                        variant="success"
+                        type="submit"
+                        name="add"
+                        className="mx-2"
+                        onClick={handleSubmit}
+                      >
+                        Add Product
+                      </Button>
+                      <Button
+                        variant="danger"
+                        type="submit"
+                        name="remove"
+                        className="mx-2"
+                        onClick={handleSubmit}
+                      >
+                        Remove Product
+                      </Button>
+                    </Form>
+                  </Container>
                 </Tab>
               </Tabs>
             </Container>
