@@ -23,7 +23,7 @@ const getMostRecentRestockOver3 = async (req, res) => {
     let restocks = await Restock.find({ quantity: { $gt: 3 } }).sort({
       date_unix: -1,
     });
-    let restock = restocks[0];
+    let restock = restocks.slice(0, 3);
     res.json(restock);
   } catch (error) {
     res.send(error);
