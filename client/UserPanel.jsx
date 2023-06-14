@@ -354,6 +354,11 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
                 <strong>Products To Alert: </strong>
               </ListGroup.Item>
             </ListGroup>
+            <Container className="d-flex justify-content-center mt-4">
+              <Button onClick={logOut} className=" btn-sm">
+                Log Out
+              </Button>
+            </Container>
           </Container>
         </Tab>
         {dbData.admin != "true" ? null : (
@@ -413,7 +418,7 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
                 <Tab eventKey="add_products" title="Manage Alertable Products">
                   <Container
                     style={{ maxWidth: "950px" }}
-                    className="text-center d-flex flex-column align-items-center justify-content-center py-5 m-2"
+                    className="text-center d-flex flex-column align-items-center justify-content-center py-2 m-2"
                   >
                     <Form>
                       <Form.Group
@@ -453,11 +458,6 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
           </Tab>
         )}
       </Tabs>
-      <Container className="d-flex justify-content-center mt-4">
-        <Button onClick={logOut} className=" btn-sm">
-          Log Out
-        </Button>
-      </Container>
     </Container>
   );
 };

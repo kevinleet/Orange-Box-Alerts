@@ -10,6 +10,7 @@ import Pricing from "../Pricing";
 import Login from "../Login";
 import { useState, useEffect } from "react";
 import UserPanel from "../UserPanel";
+import Contact from "./Contact";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,6 +40,7 @@ function App() {
         <Route path="/howitworks" element={<HowItWorks />}></Route>
         <Route path="/recentrestocks" element={<RecentRestocks />}></Route>
         <Route path="/pricing" element={<Pricing />}></Route>
+        <Route path="/contact" element={<Contact />}></Route>
         <Route
           path="/login"
           element={

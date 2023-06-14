@@ -16,7 +16,7 @@ const NavigationBar = ({ isLoggedIn }) => {
 
   return (
     <Navbar
-      expand="md"
+      expand="lg"
       expanded={expanded}
       onToggle={handleToggle}
       className="bg-light"
@@ -43,6 +43,9 @@ const NavigationBar = ({ isLoggedIn }) => {
             </Nav.Link>
             <Nav.Link as={NavLink} to="/pricing" className="mx-2">
               Pricing
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/contact" className="mx-2">
+              Contact Us
             </Nav.Link>
 
             {isLoggedIn ? (
