@@ -1,6 +1,7 @@
 import { Button, Container, Carousel } from "react-bootstrap";
 import image1 from "./images/home_1.jpg";
 import image2 from "./images/home_2.jpg";
+import image3 from "./images/home_3.jpg";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -26,6 +27,9 @@ const Home = () => {
           </Carousel.Item>
           <Carousel.Item>
             <img src={image2} className="image-width-100" />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src={image3} className="image-width-100" />
           </Carousel.Item>
         </Carousel>
       </Container>
