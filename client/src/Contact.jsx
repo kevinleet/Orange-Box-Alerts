@@ -25,6 +25,9 @@ const Contact = () => {
   };
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 text-center">
+      <h1 className="lead my-4">
+        Fill out the form below to get in touch with us.
+      </h1>
       <Container style={{ maxWidth: "600px" }}>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="contact" className="my-3">
