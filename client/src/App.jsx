@@ -4,12 +4,12 @@ import Nav from "./Nav";
 import Home from "./Home";
 import HowItWorks from "./HowItWorks";
 import Footer from "./Footer";
-import NotFound from "../NotFound";
-import RecentRestocks from "../RecentRestocks";
-import Pricing from "../Pricing";
-import Login from "../Login";
+import NotFound from "./NotFound";
+import RecentRestocks from "./RecentRestocks";
+import Pricing from "./Pricing";
+import Login from "./Login";
 import { useState, useEffect } from "react";
-import UserPanel from "../UserPanel";
+import UserPanel from "./UserPanel";
 import Contact from "./Contact";
 
 function App() {

@@ -6,7 +6,7 @@ import {
 } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
-import google from "./src/images/google.webp";
+import google from "../src/images/google.webp";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
