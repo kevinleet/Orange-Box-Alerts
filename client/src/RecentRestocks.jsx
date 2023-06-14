@@ -68,44 +68,6 @@ const RecentRestocks = () => {
           </Row>
         </Container>
       ))}
-      {/* <Container className=" pt-md-3 text-center">
-        <h1 className="lead">
-          <strong>Last Restock:</strong>{" "}
-          {Math.floor((Date.now() - restock.date_unix) / 86400000)} Days Ago
-        </h1>
-        <Row className="justify-content-center">
-          {restock.products.map((item) => (
-            <Card
-              key={item.sku}
-              style={{ width: "18rem" }}
-              className="m-2 pt-3 pb-0"
-            >
-              <Carousel interval={null}>
-                {item.assets.map((img) => (
-                  <Carousel.Item>
-                    <img
-                      className="d-block w-100"
-                      style={{ maxHeight: "262px" }}
-                      src={`https://${img.url.slice(2)}`}
-                    />
-                  </Carousel.Item>
-                ))}
-              </Carousel>
-              <Card.Body>
-                <Card.Title>{item.title}</Card.Title>
-                <Card.Text>
-                  $ {Intl.NumberFormat("en-US").format(item.price)}
-                  <br />
-                  <span className="small-text">
-                    color: {item.avgColor.toLowerCase()}
-                  </span>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          ))}
-        </Row>
-      </Container>
-       */}
     </Container>
   );
 };
