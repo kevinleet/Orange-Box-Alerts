@@ -2,11 +2,8 @@ const express = require("express");
 const Router = require("./routes/AppRouter");
 const logger = require("morgan");
 const cors = require("cors");
-const env = require("dotenv").config();
 const db = require("./db");
 const scraper = require("./app/scraper");
-const sendMail = require("./app/nodemailer");
-const alerter = require("./app/alerter");
 const path = require("path");
 
 const PORT = process.env.PORT || 3001;
@@ -30,4 +27,4 @@ app.listen(PORT, () =>
   console.log(`Application is listening on port ${PORT}.`)
 );
 
-// alerter.run();
+scraper.run();

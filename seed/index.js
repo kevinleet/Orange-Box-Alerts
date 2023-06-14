@@ -1,26 +1,26 @@
 const db = require("../db");
 const { Product, User, Alert, Restock } = require("../models");
 
-const main = async () => {
-  const product1 = new Product({
-    name: "Roulis Mini Bag",
-  });
-  await product1.save();
+// const main = async () => {
+//   const product1 = new Product({
+//     name: "Roulis Mini Bag",
+//   });
+//   await product1.save();
 
-  const product2 = new Product({
-    name: "Lindy Mini Bag",
-  });
-  await product2.save();
+//   const product2 = new Product({
+//     name: "Lindy Mini Bag",
+//   });
+//   await product2.save();
 
-  const product3 = new Product({
-    name: "Picotin Lock 18 Bag",
-  });
-  await product3.save();
+//   const product3 = new Product({
+//     name: "Picotin Lock 18 Bag",
+//   });
+//   await product3.save();
 
-  const product4 = new Product({
-    name: "Bolide on Wheels Bag",
-  });
-  await product4.save();
+//   const product4 = new Product({
+//     name: "Bolide on Wheels Bag",
+//   });
+//   await product4.save();
 
   // const user1 = new User({
   //   username: "kevblah",

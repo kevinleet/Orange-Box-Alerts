@@ -18,7 +18,20 @@ const getMostRecentRestock = async (req, res) => {
   }
 };
 
+const getMostRecentRestockOver3 = async (req, res) => {
+  try {
+    let restocks = await Restock.find({ quantity: { $gt: 3 } }).sort({
+      date_unix: -1,
+    });
+    let restock = restocks[0];
+    res.json(restock);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 module.exports = {
   getAllRestocks,
   getMostRecentRestock,
+  getMostRecentRestockOver3,
 };
