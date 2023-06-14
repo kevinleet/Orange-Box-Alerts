@@ -1,7 +1,11 @@
 const { ZenRows } = require("zenrows");
 const { ZENROWS_API } = require("../config");
 const { Restock, Product, Alert, User } = require("../models/");
-const sendMail = require("./nodemailer");
+const {
+  sendMail,
+  createRestockMessage,
+  createProductMessage,
+} = require("./nodemailer");
 
 // Function that checks for new restocks, which are defined as more products than the most recent restock in db (updated hourly)
 async function restockHandler(products) {
@@ -40,10 +44,11 @@ async function emailRestockAlerts(products) {
       productsFound.push(product.title);
     }
     let subject = `Orange Box Alerts - New Restock!`;
-    let text = `New Restock! Products found: ${productsFound}`;
+
     let usersToAlert = await User.find({ notify_all_restocks: "true" });
-    console.log("E");
+
     for (const user of usersToAlert) {
+      let text = createRestockMessage(user.first_name, productsFound);
       sendMail(user.email, subject, text);
     }
   } catch (error) {
@@ -69,8 +74,17 @@ async function productAlertHandler(products) {
           let usersToAlert = productToAlert.usersToAlert;
           let subject = `Orange Box Alerts - ${pta_name} Found!`;
           let product_url = "https://www.hermes.com/us/en" + url;
-          let text = `Product in Stock: ${pf_name}, ${avgColor}, $${price}, ${product_url}`;
+
           for (const user of usersToAlert) {
+            let img_url = assets[0].url.slice(2);
+            let text = createProductMessage(
+              user.first_name,
+              pf_name,
+              avgColor,
+              price,
+              product_url,
+              img_url
+            );
             let alerts = await Alert.find({ sku: sku, user: user._id });
             if (alerts.length > 0) {
               if (Date.now() - alerts[0].updatedAtUnix < 86400000) {
