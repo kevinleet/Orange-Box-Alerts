@@ -350,9 +350,6 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
                   <span style={{ color: "green" }}>Enabled</span>
                 )}
               </ListGroup.Item>
-              <ListGroup.Item>
-                <strong>Products To Alert: </strong>
-              </ListGroup.Item>
             </ListGroup>
             <Container className="d-flex justify-content-center mt-4">
               <Button onClick={logOut} className=" btn-sm">
