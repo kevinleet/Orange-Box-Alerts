@@ -169,36 +169,33 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
         <Tab
           eventKey="Notification Settings"
           title="Notification Settings"
-          // disabled
+          disabled={dbData.subscription_active !== "true"}
         >
           <Container>
             <Container className="mt-4 text-center">
               <Row className="justify-content-center">
                 <Card style={{ width: "24rem" }}>
                   <Card.Body>
-                    <Card.Title>
-                      Notify All Restocks{" "}
-                      {dbData.notify_all_restocks != "true" ? (
-                        <span style={{ color: "red" }}>(Disabled)</span>
-                      ) : (
-                        <span style={{ color: "green" }}>(Enabled)</span>
-                      )}
-                    </Card.Title>
+                    <Card.Title>Notify All Restocks</Card.Title>
                     <Card.Text>
                       Enable instant email notifications for all product
                       restocks!
                     </Card.Text>
                     {dbData.notify_all_restocks != "true" ? (
-                      <Button variant="success" onClick={enableAllRestocks}>
-                        Enable
+                      <Button
+                        variant="danger"
+                        className="btn-lg"
+                        onClick={enableAllRestocks}
+                      >
+                        Disabled
                       </Button>
                     ) : (
                       <Button
-                        variant="secondary"
-                        className="btn-sm"
+                        variant="success"
+                        className="btn-lg"
                         onClick={disableAllRestocks}
                       >
-                        Disable
+                        Enabled
                       </Button>
                     )}
                   </Card.Body>
@@ -209,39 +206,28 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
 
             <Container>
               <Row className="justify-content-center text-center">
+                <p className="lead">Individual Product Alerts</p>
                 {products.map((item) => (
-                  <Card style={{ width: "16rem" }} className="m-3">
+                  <Card style={{ width: "14rem" }} className="m-2">
                     <Card.Body>
                       <Card.Title>
-                        <span className="fs-6">
-                          {item.name}{" "}
-                          {dbData.products_to_alert.includes(item._id) ? (
-                            <span style={{ color: "green" }}>(Enabled)</span>
-                          ) : (
-                            <span style={{ color: "red" }}>(Disabled)</span>
-                          )}
-                        </span>
+                        <span className="fs-6">{item.name} </span>
                       </Card.Title>
-                      <Card.Text>
-                        <span className="small-text">
-                          Enable instant email notifications for all{" "}
-                          <strong>{item.name}</strong> restocks!
-                        </span>
-                      </Card.Text>
                       {dbData.products_to_alert.includes(item._id) ? (
                         <Button
-                          variant="secondary"
+                          variant="success"
                           className="btn-sm"
                           onClick={() => disableProductAlert(item._id)}
                         >
-                          Disable
+                          Enabled
                         </Button>
                       ) : (
                         <Button
-                          variant="success"
+                          variant="danger"
+                          className="btn-sm"
                           onClick={() => enableProductAlert(item._id)}
                         >
-                          Enable
+                          Disabled
                         </Button>
                       )}
                     </Card.Body>
@@ -273,9 +259,9 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
               <ListGroup.Item>
                 <strong>Notify All Restocks: </strong>
                 {dbData.notify_all_restocks != "true" ? (
-                  <span style={{ color: "red" }}>False</span>
+                  <span style={{ color: "red" }}>Disabled</span>
                 ) : (
-                  <span style={{ color: "green" }}>True</span>
+                  <span style={{ color: "green" }}>Enabled</span>
                 )}
               </ListGroup.Item>
               <ListGroup.Item>
