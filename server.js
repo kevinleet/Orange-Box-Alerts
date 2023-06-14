@@ -27,4 +27,4 @@ app.listen(PORT, () =>
   console.log(`Application is listening on port ${PORT}.`)
 );
 
-// scraper.run();
+scraper.run();
