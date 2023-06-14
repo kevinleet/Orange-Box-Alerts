@@ -8,6 +8,7 @@ const userSchema = new Schema(
     subscription_active: { type: String, required: true },
     notify_all_restocks: { type: String, required: true },
     productsToAlert: [{ type: Schema.Types.ObjectId, required: true }],
+    admin: { type: String },
   },
   { timestamps: true }
 );

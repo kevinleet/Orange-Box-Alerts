@@ -6,13 +6,15 @@ import {
   ListGroup,
   Card,
   Row,
-  Col,
+  Table,
 } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
+  const [users, setUsers] = useState([]);
+  const [subscriptionStatus, setSubscriptionStatus] = useState({});
   const [products, setProducts] = useState([]);
   const [dbData, setDbData] = useState({
     subscription_active: "",
@@ -44,14 +46,20 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   }
   async function getDatabaseData() {
     let response = await axios.get(`api/users?email=${userData.email}`);
-    const { _id, subscription_active, notify_all_restocks, productsToAlert } =
-      response.data[0];
+    const {
+      _id,
+      subscription_active,
+      notify_all_restocks,
+      productsToAlert,
+      admin,
+    } = response.data[0];
     if (productsToAlert.length == 0) {
       setDbData({
         id: _id,
         subscription_active: subscription_active,
         notify_all_restocks: notify_all_restocks,
         products_to_alert: [],
+        admin: admin,
       });
     } else {
       setDbData({
@@ -59,6 +67,7 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
         subscription_active: subscription_active,
         notify_all_restocks: notify_all_restocks,
         products_to_alert: productsToAlert,
+        admin: admin,
       });
     }
   }
@@ -132,6 +141,50 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
       }
     };
     fetchProducts();
+  }, []);
+
+  async function activateUser(id) {
+    console.log(`activating user: ${id}`);
+    await axios.put(`api/users/3`, {
+      id: id,
+      action: "activate",
+    });
+    setSubscriptionStatus({
+      ...subscriptionStatus,
+      [id]: "true",
+    });
+  }
+
+  async function deactivateUser(id) {
+    console.log(`deactivating user: ${id}`);
+    await axios.put(`api/users/3`, {
+      id: id,
+      action: "deactivate",
+    });
+    setSubscriptionStatus({
+      ...subscriptionStatus,
+      [id]: "false",
+    });
+  }
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        const response = await axios.get("/api/users");
+        setUsers(response.data);
+        // console.log()
+        for (const user of response.data) {
+          setSubscriptionStatus({
+            ...subscriptionStatus,
+            [user._id]: user.subscription_active,
+          });
+        }
+        console.log(subscriptionStatus);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllUsers();
   }, []);
 
   return (
@@ -270,6 +323,67 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
             </ListGroup>
           </Container>
         </Tab>
+        {dbData.admin != "true" ? null : (
+          <Tab eventKey="admin" title="Admin">
+            <Container style={{ maxWidth: "950px" }} className="text-center">
+              <Tabs
+                defaultActiveKey="manage_users"
+                id="uncontrolled-tab-example"
+                className="mb-3"
+              >
+                <Tab eventKey="manage_users" title="Manage Users">
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Subscription Status</th>
+                        <th>Manage User</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {users.map((user, index) => (
+                        <tr>
+                          <td>{index}</td>
+                          <td>{user.email}</td>
+                          <td>{user.first_name}</td>
+                          <td>{user.last_name}</td>
+                          <td>
+                            {subscriptionStatus[user._id] != "true"
+                              ? "Not Active"
+                              : "Active"}
+                          </td>
+                          <td>
+                            {subscriptionStatus[user._id] != "true" ? (
+                              <Button
+                                className="btn-sm btn-success"
+                                onClick={() => activateUser(user._id)}
+                              >
+                                Activate Subscription
+                              </Button>
+                            ) : (
+                              <Button
+                                className="btn-sm btn-danger"
+                                onClick={() => deactivateUser(user._id)}
+                              >
+                                Deactivate Subscription
+                              </Button>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </Tab>
+                <Tab eventKey="add_products" title="Add Alertable Products">
+                  Tab content for Profile
+                </Tab>
+              </Tabs>
+            </Container>
+          </Tab>
+        )}
       </Tabs>
       <Container className="d-flex justify-content-center mt-4">
         <Button onClick={logOut} className=" btn-sm">

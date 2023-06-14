@@ -23,6 +23,7 @@ const createUser = async (req, res) => {
       subscription_active: false,
       notify_all_restocks: false,
       products_to_alert: [],
+      admin: false,
     });
     res.send(user);
   } catch (error) {
@@ -64,9 +65,30 @@ const updateProductAlerts = async (req, res) => {
   }
 };
 
+const updateUserSubscription = async (req, res) => {
+  try {
+    if (req.body.action == "activate") {
+      let user = await User.findOneAndUpdate(
+        { _id: req.body.id },
+        { $set: { subscription_active: "true" } }
+      );
+      res.send(user);
+    } else if (req.body.action == "deactivate") {
+      let user = await User.findOneAndUpdate(
+        { _id: req.body.id },
+        { $set: { subscription_active: "false" } }
+      );
+      res.send(user);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAllUsers,
   createUser,
   updateAllRestocks,
   updateProductAlerts,
+  updateUserSubscription,
 };
