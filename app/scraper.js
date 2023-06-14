@@ -69,7 +69,7 @@ async function productAlertHandler(products) {
           let usersToAlert = productToAlert.usersToAlert;
           let subject = `Orange Box Alerts - ${pta_name} Found!`;
           let product_url = "https://www.hermes.com/us/en" + url;
-          let text = `Product in Stock: ${pf_name}, ${size}, ${avgColor}, $${price}, ${product_url}`;
+          let text = `Product in Stock: ${pf_name}, ${avgColor}, $${price}, ${product_url}`;
           for (const user of usersToAlert) {
             let alerts = await Alert.find({ sku: sku, user: user._id });
             if (alerts.length > 0) {

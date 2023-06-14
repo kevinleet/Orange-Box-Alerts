@@ -56,8 +56,7 @@ const RecentRestocks = () => {
                   $ {Intl.NumberFormat("en-US").format(item.price)}
                   <br />
                   <span className="small-text">
-                    size: {item.size.toLowerCase()} <br /> color:{" "}
-                    {item.avgColor.toLowerCase()}
+                    color: {item.avgColor.toLowerCase()}
                   </span>
                 </Card.Text>
               </Card.Body>
