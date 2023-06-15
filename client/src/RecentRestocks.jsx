@@ -47,10 +47,9 @@ const RecentRestocks = () => {
       <h2>Don't miss the next restock.</h2>
 
       {restocks.map((restock) => (
-        <Container className=" pt-md-3 text-center mb-3">
+        <Container className=" pt-md-3 text-center mb-5">
           <h1 className="lead">
             <strong>Restocked:</strong> {getRestockTime(restock.date_unix)}
-            {/* {Math.floor((Date.now() - restock.date_unix) / 86400000)} Days Ago */}
             <br />
             <strong>Number of Products: </strong> {restock.products.length}
           </h1>
@@ -59,7 +58,7 @@ const RecentRestocks = () => {
               <Card
                 key={item.sku}
                 style={{ width: "18rem" }}
-                className="m-2 pt-3 pb-0"
+                className="m-2 pt-3 mb-5"
               >
                 <Carousel interval={null}>
                   {item.assets.map((img) => (
@@ -85,6 +84,7 @@ const RecentRestocks = () => {
               </Card>
             ))}
           </Row>
+          <hr />
         </Container>
       ))}
     </Container>
