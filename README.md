@@ -2,7 +2,7 @@
 
 Orange Box Alerts is a full stack web application designed to provide users with real-time notifications for product restocks on the Hermes web store. Users can conveniently log in via Google OAuth 2.0, subscribe to product alerts, make payments securely using Stripe, and customize their notification settings from the user panel.
 
-This application was developed in just one week and is currently fully deployed at [www.orangeboxalerts.com](http://www.orangeboxalerts.com). It serves as a web scraper that regularly scans the Hermes web store to detect new product restocks. To overcome any anti-bot detection measures implemented by the web store, Orange Box Alerts utilizes Zenrows, a module designed to defeat such measures and ensure accurate restock notifications.
+This application was developed in just one week and is currently fully deployed at [www.orangeboxalerts.com](https://orangeboxalerts.com/). It serves as a web scraper that regularly scans the Hermes web store to detect new product restocks. To overcome any anti-bot detection measures implemented by the web store, Orange Box Alerts utilizes Zenrows, a module designed to defeat such measures and ensure accurate restock notifications.
 
 ![Screenshot](https://github.com/kevinleet/Orange-Box-Alerts/blob/main/client/src/images/screenshot.png?raw=true)
 
