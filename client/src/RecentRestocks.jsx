@@ -23,6 +23,23 @@ const RecentRestocks = () => {
     return <div></div>;
   }
 
+  function getRestockTime(restock_date) {
+    let restockdays = Math.floor((Date.now() - restock_date) / 86400000);
+    let restockhours = Math.floor((Date.now() - restock_date) / 3600000);
+    let restockminutes = Math.floor((Date.now() - restock_date) / 60000);
+    if (restockdays > 1) {
+      return `${restockdays} Days Ago`;
+    } else if (restockdays == 1) {
+      return `${restockdays} Day Ago`;
+    } else if (restockdays == 0) {
+      if (restockhours > 0) {
+        return `${restockhours} Hours Ago`;
+      } else {
+        return `${restockminutes} Minutes Ago`;
+      }
+    }
+  }
+
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 text-center">
       <h2>Don't miss the next restock.</h2>
@@ -30,8 +47,8 @@ const RecentRestocks = () => {
       {restocks.map((restock) => (
         <Container className=" pt-md-3 text-center mb-3">
           <h1 className="lead">
-            <strong>Restocked:</strong>{" "}
-            {Math.floor((Date.now() - restock.date_unix) / 86400000)} Days Ago
+            <strong>Restocked:</strong> {getRestockTime(restock.date_unix)}
+            {/* {Math.floor((Date.now() - restock.date_unix) / 86400000)} Days Ago */}
             <br />
             <strong>Number of Products: </strong> {restock.products.length}
           </h1>
