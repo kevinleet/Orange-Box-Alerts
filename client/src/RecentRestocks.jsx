@@ -32,7 +32,9 @@ const RecentRestocks = () => {
     } else if (restockdays == 1) {
       return `${restockdays} Day Ago`;
     } else if (restockdays == 0) {
-      if (restockhours > 0) {
+      if (restockhours == 1) {
+        return `${restockhours} Hour Ago`;
+      } else if (restockhours > 1) {
         return `${restockhours} Hours Ago`;
       } else {
         return `${restockminutes} Minutes Ago`;
