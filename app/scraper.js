@@ -7,7 +7,7 @@ const {
   createProductMessage,
 } = require("./nodemailer");
 
-// Function that checks for new restocks, which are defined as more products than the most recent restock in db (updated hourly)
+// Function that checks for new restocks, which are defined as more products than the most recent restock in db (every 3 hours)
 async function restockHandler(products) {
   try {
     let lastRestock = await Restock.findOne().sort({ date_unix: -1 });
@@ -20,7 +20,7 @@ async function restockHandler(products) {
       });
       await newRestock.save();
       emailRestockAlerts(products);
-    } else if (Date.now() - lastRestock.date_unix > 3600000) {
+    } else if (Date.now() - lastRestock.date_unix > 108000000) {
       console.log(
         "No restock detected. Pushing current products to db/restocks."
       );
