@@ -20,7 +20,7 @@ async function restockHandler(products) {
       });
       await newRestock.save();
       emailRestockAlerts(products);
-    } else if (Date.now() - lastRestock.date_unix > 108000000) {
+    } else if (Date.now() - lastRestock.date_unix > 10800000) {
       console.log(
         "No restock detected. Pushing current products to db/restocks."
       );
