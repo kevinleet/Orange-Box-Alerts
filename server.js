@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.json());
-app.use(logger("dev"));
 app.use(cors());
+// app.use(logger("dev"));
 
 app.use("/api", Router);
 

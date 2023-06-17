@@ -7,11 +7,13 @@ const {
   createProductMessage,
 } = require("./nodemailer");
 
-// Function that checks for new restocks, which are defined as more products than the most recent restock in db (every 3 hours)
+// Function that handles the logic for determining if a restock exists
+// A product restock exists when the quantity of products from the current scrape is greater than the quantity from the most recent database entry
 async function restockHandler(products) {
   try {
     let lastRestock = await Restock.findOne().sort({ date_unix: -1 });
     if (products.length > lastRestock.quantity) {
+      // New restock, users are notified and database is updated
       console.log("Restock detected! Emailing all subscribed users...");
       const newRestock = new Restock({
         date_unix: Date.now(),
@@ -21,6 +23,7 @@ async function restockHandler(products) {
       await newRestock.save();
       emailRestockAlerts(products);
     } else if (Date.now() - lastRestock.date_unix > 10800000) {
+      // Even if no restock is detected, database is updated every 3 hours to update product quantities as they decrease
       console.log(
         "No restock detected. Pushing current products to db/restocks."
       );
@@ -147,7 +150,7 @@ async function scraper() {
   }
 }
 
-// Function to run every 5 minutes.
+// Function to run scraper every 5 minutes.
 const run = () => {
   try {
     setInterval(() => {
