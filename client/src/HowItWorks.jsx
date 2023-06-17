@@ -11,9 +11,9 @@ const HowItWorks = () => {
       <Container style={{ maxWidth: "950px" }} className="text-center">
         <h2>How our technology works.</h2>
         <h6 className="lead">
-          Our team of industry-leading software engineers have developed an
-          undetectable web tool that programmatically accesses and scans the
-          Hermes web store for product restocks.{" "}
+          Our exceptional software engineering team has created a cutting-edge
+          web tool capable of accessing and scanning the Hermes web store
+          undetectably for product restocks.{" "}
         </h6>
         <Link to="/recentrestocks">
           <Button className="btn-info mt-3 me-2">Recent Restocks</Button>
