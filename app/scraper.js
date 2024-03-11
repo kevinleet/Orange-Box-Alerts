@@ -48,7 +48,10 @@ async function emailRestockAlerts(products) {
     }
     let subject = `Orange Box Alerts - New Restock!`;
 
-    let usersToAlert = await User.find({ notify_all_restocks: "true" });
+    let usersToAlert = await User.find({
+      notify_all_restocks: "true",
+      subscription_active: "true",
+    });
 
     for (const user of usersToAlert) {
       let text = createRestockMessage(user.first_name, productsFound);
@@ -131,15 +134,14 @@ async function scraper() {
     console.log("Scraping... Scraping... Scraping...");
     const { data } = await client.get(url, {
       js_render: "true",
-      antibot: "true",
       wait_for: ".product-grid-list-item",
       premium_proxy: "true",
       proxy_country: "us",
       autoparse: "true",
     });
     let products =
-      data[1][
-        "G.json.https://bck.hermes.com/products?category=WOMENBAGSBAGSCLUTCHES&a;locale=us_en&a;pagesize=40&a;sort=relevance"
+      data[0][
+        "G.json.https://bck.hermes.com/products?available_online=false&category=WOMENBAGSBAGSCLUTCHES&locale=us_en&pagesize=48&sort=relevance"
       ].body.products;
     products = products.items.filter((item) => item.price > 2100);
 
@@ -153,6 +155,7 @@ async function scraper() {
 // Function to run scraper every 5 minutes.
 const run = () => {
   try {
+    // scraper();
     setInterval(() => {
       scraper();
     }, 300000);

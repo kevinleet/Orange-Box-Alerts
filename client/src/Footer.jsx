@@ -9,10 +9,11 @@ const Footer = () => {
         className="small text-body-secondary small-text"
         style={{ marginBottom: "0" }}
       >
-        © Orange Box Alerts 2023 | Developed By{" "}
+        © Orange Box Alerts 2023
+        {/* | Developed By{" "}
         <a href="https://kevinli.boston/" target="_blank">
           Kevin Li
-        </a>{" "}
+        </a>{" "} */}
       </p>
       {/* <a target="_blank" href="https://github.com/kevinleet">
         <img src={github} style={{ maxHeight: "20px" }} />
