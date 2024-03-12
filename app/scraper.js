@@ -12,7 +12,7 @@ const {
 async function restockHandler(products) {
   try {
     let lastRestock = await Restock.findOne().sort({ date_unix: -1 });
-    if (products.length > lastRestock.quantity) {
+    if (products.length > lastRestock.quantity + 2) {
       // New restock, users are notified and database is updated
       console.log("Restock detected! Emailing all subscribed users...");
       const newRestock = new Restock({

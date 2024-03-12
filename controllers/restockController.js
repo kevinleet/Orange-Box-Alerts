@@ -32,7 +32,7 @@ const getMostRecentRestock = async (req, res) => {
 
 const getMostRecentRestockOver2 = async (req, res) => {
   try {
-    let restocks = await Restock.find({ quantity: { $gt: 6 }, type: "new" })
+    let restocks = await Restock.find({ quantity: { $gt: 2 }, type: "new" })
       .sort({
         date_unix: -1,
       })
