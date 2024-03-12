@@ -23,6 +23,26 @@ async function restockHandler(products) {
       });
       await newRestock.save();
       emailRestockAlerts(products);
+
+      // Query the Products collection to retrieve existing product names
+      const existingProducts = await Product.find({}, { name: 1 });
+      const existingProductNames = existingProducts.map(
+        (product) => product.name
+      );
+
+      // Iterate through the products in the restock
+      for (const product of products) {
+        // Check if the product exists in the existing product names
+        if (!existingProductNames.includes(product.title)) {
+          // Create a new Product document for the product
+          const newProduct = new Product({
+            name: product.title,
+            // Add any other necessary fields
+          });
+          await newProduct.save();
+          console.log(`New product created: ${product.title}`);
+        }
+      }
     } else if (Date.now() - lastRestock.date_unix > 3600000) {
       // Even if no restock is detected, database is updated every 60 minutes to update product quantities as they decrease
       console.log(
@@ -37,7 +57,7 @@ async function restockHandler(products) {
       await newRestock.save();
     }
   } catch (error) {
-    console.log(error);
+    console.error("Error handling restock:", error);
   }
 }
 
