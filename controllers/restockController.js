@@ -18,15 +18,28 @@ const getMostRecentRestock = async (req, res) => {
   }
 };
 
+// const getMostRecentRestockOver2 = async (req, res) => {
+//   try {
+//     let restocks = await Restock.find({ quantity: { $gt: 6 } }).sort({
+//       date_unix: -1,
+//     });
+//     let restock = restocks.slice(0, 5);
+//     res.json(restock);
+//   } catch (error) {
+//     res.send(error);
+//   }
+// };
+
 const getMostRecentRestockOver2 = async (req, res) => {
   try {
-    let restocks = await Restock.find({ quantity: { $gt: 6 } }).sort({
-      date_unix: -1,
-    });
-    let restock = restocks.slice(0, 5);
-    res.json(restock);
+    let restocks = await Restock.find({ quantity: { $gt: 6 }, type: "new" })
+      .sort({
+        date_unix: -1,
+      })
+      .limit(5);
+    res.json(restocks);
   } catch (error) {
-    res.send(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
