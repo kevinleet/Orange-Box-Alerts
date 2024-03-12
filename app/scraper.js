@@ -23,8 +23,8 @@ async function restockHandler(products) {
       });
       await newRestock.save();
       emailRestockAlerts(products);
-    } else if (Date.now() - lastRestock.date_unix > 1800000) {
-      // Even if no restock is detected, database is updated every 30 minutes to update product quantities as they decrease
+    } else if (Date.now() - lastRestock.date_unix > 3600000) {
+      // Even if no restock is detected, database is updated every 60 minutes to update product quantities as they decrease
       console.log(
         "No restock detected. Pushing current products to db/restocks."
       );
