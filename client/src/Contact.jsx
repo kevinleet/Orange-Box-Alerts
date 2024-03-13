@@ -69,6 +69,11 @@ const Contact = () => {
           </Button>
         </Form>
       </Container>
+      <p className="mt-3">
+        Alternatively, you can{" "}
+        <a href="mailto:admin@orangeboxalerts.com">email us</a> directly.
+      </p>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Message Submitted</Modal.Title>
