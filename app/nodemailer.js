@@ -1,20 +1,20 @@
-const { ZOHO_EMAIL, ZOHO_PW } = require("../config");
+const { EMAIL, EMAILPW } = require("../config");
 const nodemailer = require("nodemailer");
 
 let transporter = nodemailer.createTransport({
-  host: "smtp.zoho.com",
+  host: "mail.privateemail.com",
   secure: true,
   port: 465,
   auth: {
-    user: ZOHO_EMAIL,
-    pass: ZOHO_PW,
+    user: EMAIL,
+    pass: EMAILPW,
   },
 });
 
 const sendMail = (recipient, subject, text) => {
   transporter.sendMail(
     {
-      from: ZOHO_EMAIL,
+      from: EMAIL,
       to: recipient,
       subject: subject,
       html: text,
@@ -160,4 +160,8 @@ const createProductMessage = (name, product, color, price, url, img) => {
 </html>`;
 };
 
-module.exports = { sendMail, createRestockMessage, createProductMessage };
+module.exports = {
+  sendMail,
+  createRestockMessage,
+  createProductMessage,
+};
