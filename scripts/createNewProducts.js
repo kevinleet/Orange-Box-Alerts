@@ -31,8 +31,6 @@ async function createProductsFromRestockTitles() {
       await newProduct.save();
       console.log(`New product created: ${title}`);
     }
-
-    console.log("All new products created successfully.");
   } catch (error) {
     console.error("Error creating products from restock titles:", error);
   } finally {

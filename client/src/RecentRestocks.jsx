@@ -8,15 +8,15 @@ const RecentRestocks = () => {
   useEffect(() => {
     const fetchRestock = async () => {
       try {
-        let response = await axios.get("/api/restocks/recentover2");
-        console.log(response);
+        let response = await axios.get("/api/restocks/recentover2", {
+          headers: { "x-api-key": import.meta.env.VITE_APIKEY },
+        });
         setRestocks(response.data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchRestock();
-    console.log(restocks);
   }, []);
 
   if (!restocks) {

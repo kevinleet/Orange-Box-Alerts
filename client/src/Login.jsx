@@ -22,16 +22,20 @@ const Login = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
 
   async function createUser(email, given_name, family_name) {
     try {
-      let response = await axios.get(`/api/users?email=${email}`);
+      let response = await axios.get(`/api/users?email=${email}`, {
+        headers: { "x-api-key": import.meta.env.VITE_APIKEY },
+      });
       if (response.data.length == 0) {
-        console.log("New user detected.");
-        await axios.post("api/users", {
-          email: email,
-          first_name: given_name,
-          last_name: family_name,
-        });
+        await axios.post(
+          "api/users",
+          {
+            email: email,
+            first_name: given_name,
+            last_name: family_name,
+          },
+          { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+        );
       } else {
-        console.log("Returning user detected.");
       }
     } catch (error) {
       console.log(error);
@@ -82,9 +86,6 @@ const Login = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
                 localStorage.setItem("email", email);
                 localStorage.setItem("name", name);
                 localStorage.setItem("given_name", given_name);
-              }}
-              onError={() => {
-                console.log("Login Failed");
               }}
               useOneTap
               width="300"

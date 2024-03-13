@@ -47,7 +47,9 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
     localStorage.setItem("isLoggedIn", "false");
   }
   async function getDatabaseData() {
-    let response = await axios.get(`api/users?email=${userData.email}`);
+    let response = await axios.get(`api/users?email=${userData.email}`, {
+      headers: { "x-api-key": import.meta.env.VITE_APIKEY },
+    });
     const {
       _id,
       subscription_active,
@@ -76,10 +78,14 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
 
   async function enableAllRestocks() {
     try {
-      await axios.put(`api/users/1`, {
-        email: userData.email,
-        notify_all_restocks: "true",
-      });
+      await axios.put(
+        `api/users/1`,
+        {
+          email: userData.email,
+          notify_all_restocks: "true",
+        },
+        { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+      );
       getDatabaseData();
     } catch (error) {
       console.log(error);
@@ -87,10 +93,14 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   }
   async function disableAllRestocks() {
     try {
-      await axios.put(`api/users/1`, {
-        email: userData.email,
-        notify_all_restocks: "false",
-      });
+      await axios.put(
+        `api/users/1`,
+        {
+          email: userData.email,
+          notify_all_restocks: "false",
+        },
+        { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+      );
       getDatabaseData();
     } catch (error) {
       console.log(error);
@@ -99,16 +109,24 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
 
   async function enableProductAlert(id) {
     try {
-      await axios.put(`api/users/2`, {
-        email: userData.email,
-        action: "add",
-        product: id,
-      });
-      await axios.put("api/products", {
-        action: "add",
-        product: id,
-        user: dbData.id,
-      });
+      await axios.put(
+        `api/users/2`,
+        {
+          email: userData.email,
+          action: "add",
+          product: id,
+        },
+        { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+      );
+      await axios.put(
+        "api/products",
+        {
+          action: "add",
+          product: id,
+          user: dbData.id,
+        },
+        { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+      );
       getDatabaseData();
     } catch (error) {
       console.log(error);
@@ -117,16 +135,24 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
 
   async function disableProductAlert(id) {
     try {
-      await axios.put(`api/users/2`, {
-        email: userData.email,
-        action: "remove",
-        product: id,
-      });
-      await axios.put("api/products", {
-        action: "remove",
-        product: id,
-        user: dbData.id,
-      });
+      await axios.put(
+        `api/users/2`,
+        {
+          email: userData.email,
+          action: "remove",
+          product: id,
+        },
+        { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+      );
+      await axios.put(
+        "api/products",
+        {
+          action: "remove",
+          product: id,
+          user: dbData.id,
+        },
+        { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+      );
       getDatabaseData();
     } catch (error) {
       console.log(error);
@@ -136,7 +162,9 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let response = await axios.get("/api/products");
+        let response = await axios.get("/api/products", {
+          headers: { "x-api-key": import.meta.env.VITE_APIKEY },
+        });
         setProducts(response.data);
       } catch (error) {
         console.log(error);
@@ -146,11 +174,14 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   }, []);
 
   async function activateUser(id) {
-    console.log(`activating user: ${id}`);
-    await axios.put(`api/users/3`, {
-      id: id,
-      action: "activate",
-    });
+    await axios.put(
+      `api/users/3`,
+      {
+        id: id,
+        action: "activate",
+      },
+      { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+    );
     setSubscriptionStatus({
       ...subscriptionStatus,
       [id]: "true",
@@ -158,11 +189,14 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   }
 
   async function deactivateUser(id) {
-    console.log(`deactivating user: ${id}`);
-    await axios.put(`api/users/3`, {
-      id: id,
-      action: "deactivate",
-    });
+    await axios.put(
+      `api/users/3`,
+      {
+        id: id,
+        action: "deactivate",
+      },
+      { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+    );
     setSubscriptionStatus({
       ...subscriptionStatus,
       [id]: "false",
@@ -172,9 +206,10 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
   useEffect(() => {
     const getAllUsers = async () => {
       try {
-        const response = await axios.get("/api/users");
+        const response = await axios.get("/api/users", {
+          headers: { "x-api-key": import.meta.env.VITE_APIKEY },
+        });
         setUsers(response.data);
-        console.log(response.data);
         setSubscriptionStatus((prevStatus) => {
           const newStatus = { ...prevStatus };
           for (const user of response.data) {
@@ -191,36 +226,29 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log("handle submit triggered");
-    console.log(event.target);
     try {
       if (event.target.name == "add") {
-        console.log('add detected"');
-        await axios.post("/api/products", {
-          name: productToAdd,
-        });
+        await axios.post(
+          "/api/products",
+          {
+            name: productToAdd,
+          },
+          { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+        );
       } else if (event.target.name == "remove") {
-        console.log("remove detected");
-        console.log(`removing: ${productToAdd}`);
-        await axios.delete("/api/products", {
-          data: { name: productToAdd },
-        });
+        await axios.delete(
+          "/api/products",
+          {
+            data: { name: productToAdd },
+          },
+          { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+        );
       }
       setProductToAdd("");
     } catch (error) {
       console.log(error);
     }
   }
-  // async function removeProduct(event) {
-  //   event.preventDefault();
-
-  //   try {
-
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 ">
@@ -388,7 +416,6 @@ const UserPanel = ({ userData, setUserData, isLoggedIn, setIsLoggedIn }) => {
                           <td>{user.first_name}</td>
                           <td>{user.last_name}</td>
                           <td>
-                            {console.log(subscriptionStatus)}
                             {subscriptionStatus[user._id] != "true"
                               ? "Not Active"
                               : "Active"}

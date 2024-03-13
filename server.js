@@ -3,6 +3,7 @@ const Router = require("./routes/AppRouter");
 const cors = require("cors");
 const db = require("./db");
 const scraper = require("./app/scraper");
+const validateApiKey = require("./scripts/validateApiKey.js");
 const path = require("path");
 
 const PORT = process.env.PORT || 3001;
@@ -11,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/api", Router);
+app.use("/api", validateApiKey, Router);
 
 // Serve static files from the 'build' directory
 app.use(express.static(path.join(__dirname, "client/dist")));

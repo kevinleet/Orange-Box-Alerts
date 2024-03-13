@@ -12,12 +12,15 @@ const Contact = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Form submitted:", name, email, message);
-    await axios.post("/api/messages", {
-      name: name,
-      email: email,
-      message: message,
-    });
+    await axios.post(
+      "/api/messages",
+      {
+        name: name,
+        email: email,
+        message: message,
+      },
+      { headers: { "x-api-key": import.meta.env.VITE_APIKEY } }
+    );
     setName("");
     setEmail("");
     setMessage("");
@@ -82,6 +85,7 @@ const Contact = () => {
           <p>Your message has been successfully submitted.</p>
           <p>We will get back to you as soon as possible.</p>
         </Modal.Body>
+
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
