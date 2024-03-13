@@ -29,7 +29,4 @@ app.listen(PORT, () =>
 scraper.run();
 
 // things to do
-// 1. add auth for api requests
-// 2. forward messsages from contact us page to my email
-// 3. create a new email address to send alerts from
 // 4. add google analytics
