@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { initializeTagManager } from "./gtm";
 import Nav from "./Nav";
 import Home from "./Home";
 import HowItWorks from "./HowItWorks";
@@ -31,7 +30,6 @@ function App() {
       setIsLoggedIn(true);
       setUserData({ email: email, name: name, given_name: given_name });
     }
-    initializeTagManager();
   }, []);
 
   return (
