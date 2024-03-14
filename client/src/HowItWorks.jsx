@@ -2,10 +2,16 @@ import image1 from "./images/accordion_1.jpeg";
 import image2 from "./images/accordion_2.jpeg";
 import image3 from "./images/accordion_3.jpg";
 import { Link } from "react-router-dom";
+import ReactGA from "react-ga4";
 
 import { Container, Accordion, Button } from "react-bootstrap";
 
 const HowItWorks = () => {
+  ReactGA.send({
+    hitType: "pageview",
+    page: "/howitworks",
+    title: "How It Works",
+  });
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 ">
       <Container style={{ maxWidth: "950px" }} className="text-center">

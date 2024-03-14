@@ -3,8 +3,14 @@ import image1 from "./images/home_1.jpg";
 import image2 from "./images/home_2.jpg";
 import image3 from "./images/home_3.jpg";
 import { Link } from "react-router-dom";
+import ReactGA from "react-ga4";
 
 const Home = () => {
+  ReactGA.send({
+    hitType: "pageview",
+    page: "/",
+    title: "Home",
+  });
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 text-center">
       <Container>

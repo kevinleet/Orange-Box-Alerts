@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button, Card, Container, Accordion, ListGroup } from "react-bootstrap";
+import ReactGA from "react-ga4";
 
 const Pricing = () => {
+  ReactGA.send({
+    hitType: "pageview",
+    page: "/pricing",
+    title: "Pricing",
+  });
   return (
     <Container className="bg-light mt-md-3 py-3 rounded w-100 ">
       <Container style={{ maxWidth: "950px" }} className="text-center">

@@ -1,8 +1,14 @@
 import { Button, Container, Form, Modal } from "react-bootstrap";
 import axios from "axios";
 import { useState } from "react";
+import ReactGA from "react-ga4";
 
 const Contact = () => {
+  ReactGA.send({
+    hitType: "pageview",
+    page: "/contact",
+    title: "Contact",
+  });
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");

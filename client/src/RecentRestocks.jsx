@@ -2,8 +2,14 @@ import { useState, useEffect } from "react";
 import { Container, Card, Button, Row, Carousel } from "react-bootstrap";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ReactGA from "react-ga4";
 
 const RecentRestocks = () => {
+  ReactGA.send({
+    hitType: "pageview",
+    page: "/recentrestocks",
+    title: "Recent Restocks",
+  });
   const [restocks, setRestocks] = useState(null);
   useEffect(() => {
     const fetchRestock = async () => {
