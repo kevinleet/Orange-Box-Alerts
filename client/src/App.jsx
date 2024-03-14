@@ -11,6 +11,10 @@ import Login from "./Login";
 import { useState, useEffect } from "react";
 import UserPanel from "./UserPanel";
 import Contact from "./Contact";
+import ReactGA from "react-ga4";
+
+// Initialize Google Analytics
+ReactGA.initialize("G-170XF4N29K");
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
