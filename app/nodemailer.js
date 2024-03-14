@@ -12,6 +12,8 @@ let transporter = nodemailer.createTransport({
 });
 
 const sendMail = (recipient, subject, text) => {
+  console.log("email", EMAIL);
+  console.log("emailpw", EMAILPW);
   transporter.sendMail(
     {
       from: EMAIL,
