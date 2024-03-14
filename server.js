@@ -5,7 +5,6 @@ const db = require("./db");
 const scraper = require("./app/scraper");
 const validateApiKey = require("./scripts/validateApiKey.js");
 const path = require("path");
-const { sendMail } = require("./app/nodemailer.js");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -28,8 +27,3 @@ app.listen(PORT, () =>
 );
 
 scraper.run();
-
-sendMail("kevinli617@gmail.com", "test", "test");
-
-// things to do
-// 4. add google analytics
