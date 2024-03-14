@@ -1,22 +1,20 @@
-const { EMAIL, EMAILPW } = require("../config");
+const { ZOHO_EMAIL, ZOHO_PW } = require("../config");
 const nodemailer = require("nodemailer");
 
 let transporter = nodemailer.createTransport({
-  host: "mail.privateemail.com",
+  host: "smtp.zoho.com",
   secure: true,
   port: 465,
   auth: {
-    user: EMAIL,
-    pass: EMAILPW,
+    user: ZOHO_EMAIL,
+    pass: ZOHO_PW,
   },
 });
 
 const sendMail = (recipient, subject, text) => {
-  console.log("email", EMAIL);
-  console.log("emailpw", EMAILPW);
   transporter.sendMail(
     {
-      from: EMAIL,
+      from: ZOHO_EMAIL,
       to: recipient,
       subject: subject,
       html: text,
